@@ -32,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
 
     ProgressDialog mProgress;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +53,6 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
-
-
 
         LoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override

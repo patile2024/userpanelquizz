@@ -8,6 +8,20 @@
     android:background="@drawable/back_screen"
     tools:context=".LoginActivity">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="end"
+        android:layout_margin="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/logo"/>
+
+    </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,7 +29,6 @@
         android:textSize="20dp"
         android:textStyle="bold"
         android:textColor="@color/colorPrimary"
-        android:layout_marginTop="100dp"
         android:layout_marginStart="20dp"
         />
 
@@ -33,7 +46,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
             android:textColor="@android:color/black"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             />
         <EditText
             android:layout_width="match_parent"
@@ -75,6 +88,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="30dp"
             android:weightSum="3"
             >
 
@@ -84,7 +99,6 @@
                 android:layout_height="wrap_content"
                 android:text="LOGIN"
                 android:gravity="center"
-                android:layout_marginTop="40dp"
                 android:layout_marginStart="130dp"
                 android:layout_marginLeft="130dp"
                 android:textColor="@color/colorPrimaryDark"
@@ -102,10 +116,9 @@
                 android:id="@+id/LoginBtn"
                 android:layout_width="0dp"
                 android:layout_weight="1.2"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="20dp"
                 android:src="@drawable/button"
                 android:background="@android:color/transparent"
                 android:layout_gravity="end"
@@ -117,14 +130,69 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Do Not Have An Account?"
-            android:id="@+id/txtNoAccount"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="20dp"
-            android:textSize="17dp"
+            android:text="Login with"
+            android:textColor="@android:color/black"
+            android:textSize="18dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             />
-    </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:weightSum="3"
+            android:layout_marginStart="100dp"
+            android:layout_marginLeft="100dp"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.3"
+                android:layout_height="wrap_content"
+                android:text="FACEBOOK"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#2934C6"
+                android:textSize="18dp"
+                />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.4"
+                ></View>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.3"
+                android:layout_height="wrap_content"
+                android:text="GOOGLE"
+                android:textColor="#F01111"
+                android:textSize="18dp"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtNoAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            android:layout_marginTop="35dp"
+            android:layout_marginBottom="20dp"
+            android:text="Do Not Have An Account?"
+            android:textSize="18dp"
+            />
+
+
+    </LinearLayout>
 
 </LinearLayout>
