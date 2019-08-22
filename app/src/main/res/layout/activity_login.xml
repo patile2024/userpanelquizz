@@ -5,30 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/back_screen"
     tools:context=".LoginActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:id="@+id/LoginToolbar"
-        android:background="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            android:gravity="center"
-            android:textSize="25sp"
-            android:textColor="@android:color/white"
-            />
-    </androidx.appcompat.widget.Toolbar>
+        android:text="LOGIN"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="20dp"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,17 +30,19 @@
             android:layout_height="wrap_content"
             android:text="Email"
             android:textSize="16sp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginStart="12dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:textColor="@android:color/black"
-            android:layout_marginTop="100dp"
-
+            android:layout_marginTop="40dp"
             />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
             android:text="srk@gmail.com"
             android:id="@+id/LoginEmail"
             android:inputType="textEmailAddress"
@@ -59,8 +50,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginStart="12dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:text="Password"
             android:textSize="16sp"
             android:textColor="@android:color/black"
@@ -69,23 +60,59 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
             android:text="123456"
             android:id="@+id/LoginPass"
             android:inputType="textPassword"
             />
 
-        <Button
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:text="Login"
-            android:id="@+id/LoginBtn"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:layout_margin="25dp"
-            />
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:weightSum="3"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.2"
+                android:layout_height="wrap_content"
+                android:text="LOGIN"
+                android:gravity="center"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="130dp"
+                android:layout_marginLeft="130dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18dp"
+
+                />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.6"
+                ></View>
+
+            <ImageButton
+                android:id="@+id/LoginBtn"
+                android:layout_width="0dp"
+                android:layout_weight="1.2"
+                android:layout_height="150dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/button"
+                android:background="@android:color/transparent"
+                android:layout_gravity="end"
+                android:foregroundGravity="center_horizontal"
+                />
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -93,6 +120,9 @@
             android:layout_gravity="center"
             android:text="Do Not Have An Account?"
             android:id="@+id/txtNoAccount"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="17dp"
             />
     </LinearLayout>
 
