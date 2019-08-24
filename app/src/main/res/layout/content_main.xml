@@ -1,11 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
+    android:background="@drawable/dashboard_mainscreen"
+    android:orientation="vertical"
     tools:showIn="@layout/app_bar_main">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+    <Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/inputsbtn"
+        android:id="@+id/logicalBtn"
+    android:text="Logical"
+    android:textAllCaps="false"
+        android:layout_margin="20dp"
+
+        />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/inputsbtn"
+            android:id="@+id/analyticalBtn"
+            android:text="Analytical"
+            android:textAllCaps="false"
+            android:layout_margin="20dp"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/inputsbtn"
+            android:id="@+id/GeneralBtn"
+            android:text="General"
+            android:textAllCaps="false"
+            android:layout_margin="20dp"
+
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/inputsbtn"
+            android:id="@+id/EteaBtn"
+            android:text="ETEA"
+            android:textAllCaps="false"
+            android:layout_margin="20dp"
+
+            />
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@drawable/reward_img"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+
+            />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
