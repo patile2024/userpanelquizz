@@ -59,14 +59,10 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         //Button and Check box
-
-
         confirmBtn = (Button) findViewById(R.id.RegBtn);
         checkBox = (CheckBox) findViewById(R.id.Regchkbox);
 
         mAuth = FirebaseAuth.getInstance();
-
-
 
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +87,6 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void RegisterAccount(final String sName, final String sEmail, final String sPass, final String sPhone) {
 
-
         mProgress.setTitle("Please Wait");
         mProgress.setMessage("Registering Account");
         mProgress.show();
@@ -100,7 +95,6 @@ public class SignUpActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if (task.isSuccessful()){
-
 
                     String SaveCurrentDate;
 
