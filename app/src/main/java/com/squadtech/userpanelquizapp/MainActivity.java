@@ -1,5 +1,6 @@
 package com.squadtech.userpanelquizapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,10 +21,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private Button logiBtn, eteaBtn, genBtn, anaBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +35,49 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        logiBtn = (Button)findViewById(R.id.logicalBtn);
+        eteaBtn = (Button)findViewById(R.id.EteaBtn);
+        genBtn = (Button)findViewById(R.id.GeneralBtn);
+        anaBtn = (Button)findViewById(R.id.analyticalBtn);
+
+
+
+        logiBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this , SelectQuestions.class);
+                intent.putExtra("logical" , "Logical");
+                startActivity(intent);
+            }
+        });
+
+        eteaBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this , SelectQuestions.class);
+                intent.putExtra("etea" , "ETEA");
+                startActivity(intent);
+            }
+        });
+
+        genBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this , SelectQuestions.class);
+                intent.putExtra("general" , "General");
+                startActivity(intent);
+            }
+        });
+
+        anaBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this , SelectQuestions.class);
+                intent.putExtra("analytical" , "Analytical");
+                startActivity(intent);
+            }
+        });
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
