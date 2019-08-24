@@ -5,41 +5,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:weightSum="9.5"
     android:background="@drawable/dashboard_mainscreen"
     tools:context=".Profile.ProfileActivity">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"></View>
+
     <ImageButton
+        android:id="@+id/back_to_mainDashboard"
+        android:onClick="backtoDashboard"
         android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_margin="20dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:background="@drawable/ic_back"
         />
 
-    <Button
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:background="@android:color/white"
-        android:text="Profile"
-        android:layout_marginTop="100dp"
-        android:onClick="ReferToProfile"
-        />
+        android:layout_height="0dp"
+        android:layout_weight="1.5"></View>
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp"
-        android:background="@android:color/white"
+        android:background="@drawable/inputsbtn"
+        android:text="Profile"
+        android:onClick="ReferToProfile"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"></View>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/inputsbtn"
         android:text="Credit Record"
         android:onClick="ReferToCreditRecord"
         />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"></View>
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="@drawable/reward_img"
+        android:layout_gravity="center"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></View>
 
 </LinearLayout>

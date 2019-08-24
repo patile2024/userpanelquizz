@@ -14,6 +14,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.squadtech.userpanelquizapp.Profile.ProfileActivity;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -78,8 +79,8 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+//        NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -127,7 +128,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_Profile)
         {
-
+            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
         }
         else if (id == R.id.nav_quiz_contest)
         {
