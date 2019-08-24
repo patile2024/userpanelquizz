@@ -33,6 +33,10 @@
         android:layout_marginStart="20dp"
         />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -160,12 +164,70 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/txtAlreadyReg"
-            android:text="Already Registered ?"
+            android:text="Register with"
+            android:textColor="@android:color/black"
+            android:textSize="18dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:weightSum="3"
+            android:layout_marginStart="100dp"
+            android:layout_marginLeft="100dp"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.3"
+                android:layout_height="wrap_content"
+                android:text="FACEBOOK"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#2934C6"
+                android:textSize="18dp"
+                />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.4"
+                ></View>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.3"
+                android:layout_height="wrap_content"
+                android:text="GOOGLE"
+                android:textColor="#F01111"
+                android:textSize="18dp"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtAlreadyReg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            android:layout_marginTop="35dp"
+            android:layout_marginBottom="20dp"
+            android:text="Already Registered?"
+            android:textSize="18dp"
+            />
 
     </LinearLayout>
+
+</ScrollView>
 
 </LinearLayout>
