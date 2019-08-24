@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/dashboard_mainscreen"
+    tools:context=".SelectQuestions">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Select Question"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:gravity="center"
+            />
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="6.7"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="10 Questions : Required Points 5"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:id="@+id/pts10"
+            android:layout_weight="0.8"
+            android:layout_margin="20dp"
+            android:background="@drawable/inputsbtn"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="30 Questions : Required Points 10"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:id="@+id/pts30"
+            android:layout_weight="0.8"
+
+            android:layout_margin="20dp"
+            android:background="@drawable/inputsbtn"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="50 Questions : Required Points 20"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:id="@+id/pts50"
+            android:layout_margin="20dp"
+            android:layout_weight="0.8"
+            android:background="@drawable/inputsbtn"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:text="100 Questions : Required Points 30"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:id="@+id/pts100"
+            android:layout_margin="20dp"
+            android:background="@drawable/inputsbtn"
+            />
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.6"
+            />
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="0dp"
+            android:src="@drawable/reward_img"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:layout_weight="2"
+            />
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.6"
+            />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
