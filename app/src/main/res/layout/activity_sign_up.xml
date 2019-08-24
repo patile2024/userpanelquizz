@@ -10,6 +10,30 @@
     >
 
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="end"
+        android:layout_margin="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/logo"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SIGN UP"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginStart="20dp"
+        />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -89,19 +113,49 @@
             android:id="@+id/Regchkbox"
             />
 
-        <Button
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_margin="30dp"
-            android:id="@+id/RegBtn"
-            android:background="@color/colorPrimaryDark"
-            android:text="Register"
-            android:textColor="@android:color/white"
-            android:textAllCaps="false"
+            android:gravity="center"
+            android:layout_marginTop="30dp"
+            android:weightSum="3"
+            >
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.2"
+                android:layout_height="wrap_content"
+                android:text="REGISTER"
+                android:gravity="center"
+                android:layout_marginStart="130dp"
+                android:layout_marginLeft="130dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18dp"
 
-            />
+                />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.6"
+                ></View>
+
+            <ImageButton
+                android:id="@+id/RegBtn"
+                android:layout_width="0dp"
+                android:layout_weight="1.2"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/button"
+                android:background="@android:color/transparent"
+                android:layout_gravity="end"
+                android:foregroundGravity="center_horizontal"
+                />
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
