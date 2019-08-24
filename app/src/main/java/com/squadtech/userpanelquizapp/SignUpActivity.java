@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText eName , eEmail , ePass , ePhone ;
 
     private TextView txtAlreadyAcnt;
-    private Button confirmBtn;
+    private ImageButton confirmBtn;
     private CheckBox checkBox;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -59,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         //Button and Check box
-        confirmBtn = (Button) findViewById(R.id.RegBtn);
+        confirmBtn = (ImageButton) findViewById(R.id.RegBtn);
         checkBox = (CheckBox) findViewById(R.id.Regchkbox);
 
         mAuth = FirebaseAuth.getInstance();
