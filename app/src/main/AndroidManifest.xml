@@ -9,14 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SelectQuestions"></activity>
+        <activity android:name=".GeneralActivity"></activity>
+        <activity android:name=".EteaActivity" />
+        <activity android:name=".AnalyticalActivity" />
+        <activity android:name=".SelectQuestions" />
         <activity android:name=".LogicalActivity" />
-        <activity android:name=".Profile.profileSetting"></activity>
+        <activity android:name=".Profile.profileSetting" />
         <activity android:name=".Profile.ProfileActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SplashScreen">
