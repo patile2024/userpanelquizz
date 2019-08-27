@@ -5,14 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/quizbackground"
     tools:context=".LogicalActivity">
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This is Logical activity"
-        android:gravity="center"
-        android:layout_gravity="center"
-        />
+        android:orientation="vertical"
+        android:id="@+id/topLinear"
+        >
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btnstyle"
+            android:textColor="@android:color/white"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:id="@+id/subBtn"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"
+            android:layout_gravity="right"
+
+            />
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/inputsbtn"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center"
+            android:text="1"
+
+            />
+    </LinearLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_below="@+id/topLinear"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewpaggerid">
+
+    </androidx.viewpager.widget.ViewPager>
+
+
 
 </LinearLayout>
