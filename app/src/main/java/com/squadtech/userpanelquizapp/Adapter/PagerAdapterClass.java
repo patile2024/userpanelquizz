@@ -26,6 +26,7 @@ public class PagerAdapterClass extends PagerAdapter {
     public PagerAdapterClass(Context context, ArrayList<Questions> questionsArrayList) {
         this.context = context;
         this.questionsArrayList = questionsArrayList;
+        System.out.println("My array is "+ questionsArrayList);
     }
 
 
@@ -40,6 +41,9 @@ public class PagerAdapterClass extends PagerAdapter {
         TextView option2 = view.findViewById(R.id.option2);
         TextView option3 = view.findViewById(R.id.option3);
         TextView option4 = view.findViewById(R.id.option4);
+
+
+        System.err.println("my data"+questionsArrayList.get(position).getQuestion());
 
 
 
