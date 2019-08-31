@@ -20,9 +20,9 @@ import com.google.firebase.database.ValueEventListener;
 
 public class SelectQuestions extends AppCompatActivity {
 
-    private TextView pst10 , pst30 , pst50 , pst100;
+    private TextView pst10, pst30, pst50, pst100;
 
-    DatabaseReference myPoints ;
+    DatabaseReference myPoints;
     FirebaseAuth mAuth;
     int pointsInt;
     String totalPoint;
@@ -76,314 +76,294 @@ public class SelectQuestions extends AppCompatActivity {
             }
         });
         if (logical != null && logical.equals("Logical")) {
-                pst10.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+            pst10.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                        if (pointsInt >= 10 && pointsInt != 0) {
-                            Intent logIntent = new Intent(SelectQuestions.this, LogicalActivity.class);
-                            logIntent.putExtra("10", "10");
-                            startActivity(logIntent);
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
-
-                        }
+                    if (pointsInt >= 10 && pointsInt != 0) {
+                        Intent logIntent = new Intent(SelectQuestions.this, LogicalActivity.class);
+                        logIntent.putExtra("val", "10");
+                        startActivity(logIntent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
 
                     }
-                });
+
+                }
+            });
 
 
-                    pst30.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
+            pst30.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                            if (pointsInt >= 15 && pointsInt != 0) {
-                                Intent logIntent = new Intent(SelectQuestions.this, LogicalActivity.class);
-                                logIntent.putExtra("30", "30");
-                                startActivity(logIntent);
-                            }
-                            else {
-                                Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
-
-                            }
-
-                        }
-                    });
-
-
-                    pst50.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            if (pointsInt >= 25 && pointsInt != 0) {
-                            Intent logIntent = new Intent(SelectQuestions.this, LogicalActivity.class);
-                            logIntent.putExtra("50", "50");
-                            startActivity(logIntent);
-
-                        } else {
-                                Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
-                            }
-
-                        }
-                    });
-
-                    pst100.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            if (pointsInt >= 50 && pointsInt != 0) {
-
-                                Intent logIntent = new Intent(SelectQuestions.this, LogicalActivity.class);
-                                logIntent.putExtra("100", "100");
-                                startActivity(logIntent);
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
-
-
-                            }
-                        }
-                    });
-
-            }
-
-            if (analytical != null && analytical.equalsIgnoreCase("Analytical")) {
-
-
-
-
-
-
-                    pst10.setOnClickListener(new View.OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        if (pointsInt >= 10 && pointsInt != 0) {
-                            Toast.makeText(SelectQuestions.this, "Analytical", Toast.LENGTH_SHORT).show();
-                            Intent logIntent = new Intent(SelectQuestions.this, AnalyticalActivity.class);
-                            logIntent.putExtra("10", "10");
-                            startActivity(logIntent);
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
-
-                        }
-
+                    if (pointsInt >= 15 && pointsInt != 0) {
+                        Intent logIntent = new Intent(SelectQuestions.this, LogicalActivity.class);
+                        logIntent.putExtra("val", "30");
+                        startActivity(logIntent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
 
                     }
-                });
+
+                }
+            });
 
 
-                pst30.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (pointsInt >= 15 && pointsInt != 0) {
-
-                            Intent logIntent = new Intent(SelectQuestions.this, AnalyticalActivity.class);
-                            logIntent.putExtra("30", "30");
-                            startActivity(logIntent);
-                        }
-                        else {
-                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                });
-
-
-                pst50.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (pointsInt >= 25 && pointsInt != 0) {
-
-                            Intent logIntent = new Intent(SelectQuestions.this, AnalyticalActivity.class);
-                        logIntent.putExtra("50", "50");
+            pst50.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (pointsInt >= 25 && pointsInt != 0) {
+                        Intent logIntent = new Intent(SelectQuestions.this, LogicalActivity.class);
+                        logIntent.putExtra("val", "50");
                         startActivity(logIntent);
 
-                    }
-                        else {
-                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                });
-
-
-                pst100.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (pointsInt >= 25 && pointsInt != 0) {
-                            Intent logIntent = new Intent(SelectQuestions.this, AnalyticalActivity.class);
-                            logIntent.putExtra("100", "100");
-                            startActivity(logIntent);
-
-                        }
-                        else {
-                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
-
-                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
                     }
 
-                });
+                }
+            });
 
+            pst100.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (pointsInt >= 50 && pointsInt != 0) {
 
-            }
-            if (general != null && general.equalsIgnoreCase("General")) {
-
-
-                pst10.setOnClickListener(new View.OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        if (pointsInt >= 10 && pointsInt != 0) {
-                            Toast.makeText(SelectQuestions.this, "Analytical", Toast.LENGTH_SHORT).show();
-                            Intent logIntent = new Intent(SelectQuestions.this, GeneralActivity.class);
-                            logIntent.putExtra("10", "10");
-                            startActivity(logIntent);
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
-
-                        }
+                        Intent logIntent = new Intent(SelectQuestions.this, LogicalActivity.class);
+                        logIntent.putExtra("val", "100");
+                        startActivity(logIntent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
 
 
                     }
-                });
+                }
+            });
+
+        }
+
+        if (analytical != null && analytical.equalsIgnoreCase("Analytical")) {
 
 
-                pst30.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (pointsInt >= 15 && pointsInt != 0) {
-
-                            Intent logIntent = new Intent(SelectQuestions.this, GeneralActivity.class);
-                            logIntent.putExtra("30", "30");
-                            startActivity(logIntent);
-                        }
-                        else {
-                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                });
+            pst10.setOnClickListener(new View.OnClickListener() {
 
 
-                pst50.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (pointsInt >= 25 && pointsInt != 0) {
-
-                            Intent logIntent = new Intent(SelectQuestions.this, GeneralActivity.class);
-                            logIntent.putExtra("50", "50");
-                            startActivity(logIntent);
-
-                        }
-                        else {
-                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                });
-
-
-                pst100.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (pointsInt >= 25 && pointsInt != 0) {
-                            Intent logIntent = new Intent(SelectQuestions.this, GeneralActivity.class);
-                            logIntent.putExtra("100", "100");
-                            startActivity(logIntent);
-
-                        }
-                        else {
-                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-
-                });
-
-
-            }
-            if (etea != null && etea.equalsIgnoreCase("ETEA")) {
-                pst10.setOnClickListener(new View.OnClickListener() {
-
-
-                    @Override
-                    public void onClick(View view) {
-                        if (pointsInt >= 10 && pointsInt != 0) {
-                            Toast.makeText(SelectQuestions.this, "Analytical", Toast.LENGTH_SHORT).show();
-                            Intent logIntent = new Intent(SelectQuestions.this, EteaActivity.class);
-                            logIntent.putExtra("10", "10");
-                            startActivity(logIntent);
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
-
-                        }
-
+                @Override
+                public void onClick(View view) {
+                    if (pointsInt >= 10 && pointsInt != 0) {
+                        Intent logIntent = new Intent(SelectQuestions.this, AnalyticalActivity.class);
+                        logIntent.putExtra("val", "10");
+                        startActivity(logIntent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
 
                     }
-                });
 
 
-                pst30.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (pointsInt >= 15 && pointsInt != 0) {
+                }
+            });
 
-                            Intent logIntent = new Intent(SelectQuestions.this, EteaActivity.class);
-                            logIntent.putExtra("30", "30");
-                            startActivity(logIntent);
-                        }
-                        else {
-                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
 
-                        }
+            pst30.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (pointsInt >= 15 && pointsInt != 0) {
+
+                        Intent logIntent = new Intent(SelectQuestions.this, AnalyticalActivity.class);
+                        logIntent.putExtra("val", "30");
+                        startActivity(logIntent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
                     }
-                });
+                }
+            });
 
 
-                pst50.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (pointsInt >= 25 && pointsInt != 0) {
+            pst50.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (pointsInt >= 25 && pointsInt != 0) {
 
-                            Intent logIntent = new Intent(SelectQuestions.this, EteaActivity.class);
-                            logIntent.putExtra("50", "50");
-                            startActivity(logIntent);
+                        Intent logIntent = new Intent(SelectQuestions.this, AnalyticalActivity.class);
+                        logIntent.putExtra("val", "50");
+                        startActivity(logIntent);
 
-                        }
-                        else {
-                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
 
-                        }
                     }
-                });
+                }
+            });
 
 
-                pst100.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (pointsInt >= 25 && pointsInt != 0) {
-                            Intent logIntent = new Intent(SelectQuestions.this, EteaActivity.class);
-                            logIntent.putExtra("100", "100");
-                            startActivity(logIntent);
+            pst100.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (pointsInt >= 50 && pointsInt != 0) {
+                        Intent logIntent = new Intent(SelectQuestions.this, AnalyticalActivity.class);
+                        logIntent.putExtra("val", "100");
+                        startActivity(logIntent);
 
-                        }
-                        else {
-                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
 
-                        }
                     }
+                }
 
-                });
-
-            }
-
-
-            //
+            });
 
 
         }
+        if (general != null && general.equalsIgnoreCase("General")) {
+
+
+            pst10.setOnClickListener(new View.OnClickListener() {
+
+
+                @Override
+                public void onClick(View view) {
+                    if (pointsInt >= 10 && pointsInt != 0) {
+                        Intent logIntent = new Intent(SelectQuestions.this, GeneralActivity.class);
+                        logIntent.putExtra("val", "10");
+                        startActivity(logIntent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                }
+            });
+
+
+            pst30.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (pointsInt >= 15 && pointsInt != 0) {
+
+                        Intent logIntent = new Intent(SelectQuestions.this, GeneralActivity.class);
+                        logIntent.putExtra("val", "30");
+                        startActivity(logIntent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            });
+
+
+            pst50.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (pointsInt >= 25 && pointsInt != 0) {
+
+                        Intent logIntent = new Intent(SelectQuestions.this, GeneralActivity.class);
+                        logIntent.putExtra("val", "50");
+                        startActivity(logIntent);
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            });
+
+
+            pst100.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (pointsInt >= 50 && pointsInt != 0) {
+                        Intent logIntent = new Intent(SelectQuestions.this, GeneralActivity.class);
+                        logIntent.putExtra("val", "100");
+                        startActivity(logIntent);
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+
+            });
+
+
+        }
+        if (etea != null && etea.equalsIgnoreCase("ETEA")) {
+            pst10.setOnClickListener(new View.OnClickListener() {
+
+
+                @Override
+                public void onClick(View view) {
+                    if (pointsInt >= 10 && pointsInt != 0) {
+                        Intent logIntent = new Intent(SelectQuestions.this, EteaActivity.class);
+                        logIntent.putExtra("val", "10");
+                        startActivity(logIntent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                }
+            });
+
+
+            pst30.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (pointsInt >= 15 && pointsInt != 0) {
+
+                        Intent logIntent = new Intent(SelectQuestions.this, EteaActivity.class);
+                        logIntent.putExtra("val", "30");
+                        startActivity(logIntent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            });
+
+
+            pst50.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (pointsInt >= 25 && pointsInt != 0) {
+
+                        Intent logIntent = new Intent(SelectQuestions.this, EteaActivity.class);
+                        logIntent.putExtra("val", "50");
+                        startActivity(logIntent);
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            });
+
+
+            pst100.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (pointsInt >= 50 && pointsInt != 0) {
+                        Intent logIntent = new Intent(SelectQuestions.this, EteaActivity.class);
+                        logIntent.putExtra("val", "100");
+                        startActivity(logIntent);
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+
+            });
+
+        }
+
+
+        //
+
+
     }
+}
 

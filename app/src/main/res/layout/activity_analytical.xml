@@ -32,29 +32,37 @@
             android:layout_gravity="right"
 
             />
+
+        <Chronometer
+            android:layout_width="100dp"
+            android:id="@+id/timer"
+            android:layout_height="40dp"
+            android:background="@drawable/inputsbtn"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center"
+            android:text="00:00"
+            />
     </LinearLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpaggerid"
         android:layout_width="match_parent"
-        android:layout_height="596dp"
+        android:layout_height="598dp"
         android:layout_below="@+id/topLinear"
-        android:layout_marginTop="77dp">
-
-    </androidx.viewpager.widget.ViewPager>
-
+        android:layout_marginTop="21dp"></androidx.viewpager.widget.ViewPager>
 
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Next"
-        android:textColor="@android:color/white"
-        android:background="@drawable/btnstyle"
-        android:layout_marginTop="10dp"
-        android:textSize="20dp"
-        android:textAllCaps="false"
         android:layout_gravity="left"
-        android:onClick="next"/>
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btnstyle"
+        android:onClick="next"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="20dp" />
 
 </RelativeLayout>

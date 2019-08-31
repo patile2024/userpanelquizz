@@ -39,7 +39,10 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
     private static final String STATE_LIST = "State Adapter Data";
 
     int pagenextnumber = 0;
+    String get10pts,get30pts,get50pts,get100pts;
 
+
+    int q10, q30,q50,q100;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +54,19 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
 
 
         firebaseLoader = this;
+        try {
+            get10pts = getIntent().getStringExtra("val" );
 
+
+
+
+            q10 = Integer.parseInt(get10pts);
+        }catch (Exception e){
+
+        }
         loadData();
 
 
-        String get10pts = getIntent().getStringExtra("10" );
-        String get30pts = getIntent().getStringExtra("30" );
-        String get50pts = getIntent().getStringExtra("50" );
-        String get100pts = getIntent().getStringExtra("100" );
         viewPager.setPageTransformer(true, new DepthPageTransformer());
 
 
@@ -97,23 +105,113 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
 
     private void loadData() {
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-                    questionsArrayList.add(ds.getValue(Questions.class));
-                    firebaseLoader.onFirebaseLoadSuccess(questionsArrayList);
-                    System.out.println("Snapshots " + ds.getValue());
+        try {
 
+            switch (q10){
+                case 10 : {
+                    databaseReference.limitToFirst(10).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+
+
+                                questionsArrayList.add(ds.getValue(Questions.class));
+                                firebaseLoader.onFirebaseLoadSuccess(questionsArrayList);
+                                System.out.println("Snapshots " + ds.getValue());
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            firebaseLoader.onFirebaseLoadFailure(databaseError.getMessage());
+                        }
+                    });
+
+                    break;
+                }
+                case 30 : {
+                    databaseReference.limitToFirst(30).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+
+
+                                questionsArrayList.add(ds.getValue(Questions.class));
+                                firebaseLoader.onFirebaseLoadSuccess(questionsArrayList);
+                                System.out.println("Snapshots " + ds.getValue());
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            firebaseLoader.onFirebaseLoadFailure(databaseError.getMessage());
+                        }
+                    });
+                    break;
+                }
+
+                case 50 :{
+                    databaseReference.limitToFirst(50).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+
+
+                                questionsArrayList.add(ds.getValue(Questions.class));
+                                firebaseLoader.onFirebaseLoadSuccess(questionsArrayList);
+                                System.out.println("Snapshots " + ds.getValue());
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            firebaseLoader.onFirebaseLoadFailure(databaseError.getMessage());
+                        }
+                    });
+                    break;
+
+                }
+                case 100: {
+                    databaseReference.limitToFirst(100).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+
+
+                                questionsArrayList.add(ds.getValue(Questions.class));
+                                firebaseLoader.onFirebaseLoadSuccess(questionsArrayList);
+                                System.out.println("Snapshots " + ds.getValue());
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            firebaseLoader.onFirebaseLoadFailure(databaseError.getMessage());
+                        }
+                    });
+                    break;
+                }
+
+                default: {
+                    Toast.makeText(this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                 }
             }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                firebaseLoader.onFirebaseLoadFailure(databaseError.getMessage());
-            }
-        });
+        }catch (Exception e){
+            String getmessage ;
+
+            Toast.makeText(this, "Error"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
