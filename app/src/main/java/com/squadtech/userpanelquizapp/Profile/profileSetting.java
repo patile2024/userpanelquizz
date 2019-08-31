@@ -8,8 +8,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
@@ -18,6 +21,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,8 +48,10 @@ public class profileSetting extends AppCompatActivity
     private DatabaseReference mRootRef;
     private String  downloadImgUrl;
     boolean exists = false;
+    private Button save_profile_changes_btnID;
+    private EditText change_username,changePhone;
 
-
+private TextView myEmailtxt;
 
 
     @Override
@@ -56,7 +62,39 @@ public class profileSetting extends AppCompatActivity
 
         uploadprofileBtn = (ImageButton)findViewById(R.id.upload_profile_picture);
         currentProfilePicture = (ImageView)findViewById(R.id.currentProfileImage);
+        myEmailtxt = (TextView)findViewById(R.id.myEmailtxt);
+        change_username = (EditText)findViewById(R.id.change_username);
+        changePhone = (EditText)findViewById(R.id.change_phonenumber);
+        save_profile_changes_btnID = (Button)findViewById(R.id.save_profile_changes_btnID);
 
+        save_profile_changes_btnID.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ValidateName();
+            }
+        });
+        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getUid());
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                String username = dataSnapshot.child("user_name").getValue().toString();
+                String userPhone = dataSnapshot.child("user_phone").getValue().toString();
+                     String getEmail = dataSnapshot.child("user_email").getValue().toString();
+                change_username.setText(username);
+                changePhone.setText(userPhone);
+                myEmailtxt.setText(getEmail);
+
+                // Picasso.get().load(getimage).placeholder(R.drawable.profile).into(myImageview);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         uploadprofileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,8 +182,34 @@ public class profileSetting extends AppCompatActivity
         });
     }
 
+    private void ValidateName() {
+        FirebaseUser current_user_id = FirebaseAuth.getInstance().getCurrentUser();
+        final String uid = current_user_id.getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
 
-    private void ChangeProfile() {
+        HashMap<String, Object> userMap = new HashMap<>();
+        userMap.put("user_name", change_username.getText().toString());
+        userMap.put("user_phone", changePhone.getText().toString());
+
+        ref.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(profileSetting.this, "Settings Update Successfully", Toast.LENGTH_SHORT).show();
+                }
+                if (!task.isSuccessful()) {
+                    task.getException();
+                }
+
+
+            }
+
+        });
+    }
+
+
+
+        private void ChangeProfile() {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("user_dp", downloadImgUrl);
 

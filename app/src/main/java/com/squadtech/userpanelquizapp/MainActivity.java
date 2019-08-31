@@ -8,13 +8,21 @@ import com.google.android.material.snackbar.Snackbar;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squadtech.userpanelquizapp.Profile.ProfileActivity;
+import com.squareup.picasso.Picasso;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -23,11 +31,20 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Button logiBtn, eteaBtn, genBtn, anaBtn;
+    CircleImageView headProfile;
+    TextView headName;
+    FirebaseAuth mAuth;
+    TextView headEmail;
+    DatabaseReference mRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,12 +53,50 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
 
         logiBtn = (Button)findViewById(R.id.logicalBtn);
         eteaBtn = (Button)findViewById(R.id.EteaBtn);
         genBtn = (Button)findViewById(R.id.GeneralBtn);
         anaBtn = (Button)findViewById(R.id.analyticalBtn);
 
+        //Firebase
+
+        mAuth = FirebaseAuth.getInstance();
+
+        mRef = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getUid());
+
+
+
+
+        //Headers
+
+          headProfile = headerView.findViewById(R.id.headProfileImg);
+        headName = headerView.findViewById(R.id.HeaderUserName);
+        headEmail =headerView.findViewById(R.id.headerEmail);
+
+
+        //Value Listener
+
+        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String image_url = dataSnapshot.child("user_dp").getValue().toString();
+                String nameS = dataSnapshot.child("user_name").getValue().toString();
+                String emailS = dataSnapshot.child("user_email").getValue().toString();
+                System.out.println("my email "+  dataSnapshot.child("user_email").getValue().toString());
+               headEmail.setText(emailS);
+                headName.setText(nameS);
+                if (image_url != null && !image_url.equals("") && !image_url.equals("default")) {
+                    Picasso.get().load(image_url).placeholder(R.drawable.ic_profile).into(headProfile);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
         logiBtn.setOnClickListener(new View.OnClickListener() {

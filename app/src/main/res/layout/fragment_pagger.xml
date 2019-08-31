@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PaggerFragment">
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="170dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Question"
+            android:textSize="18sp"
+            android:id="@+id/questiontxt"
+            android:textColor="@android:color/black"
+            android:layout_margin="15dp"
+            />
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Option 1"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/textinputs"
+            android:id="@+id/option1"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Option 2"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/textinputs"
+            android:id="@+id/option2"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Option 3"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/textinputs"
+            android:id="@+id/option3"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Option 4"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/textinputs"
+            android:id="@+id/option4"
+            />
+
+    </LinearLayout>
+
+
+
+</FrameLayout>
