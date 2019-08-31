@@ -25,6 +25,7 @@ public class SelectQuestions extends AppCompatActivity {
     DatabaseReference myPoints ;
     FirebaseAuth mAuth;
     int pointsInt;
+    String totalPoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,24 +61,21 @@ public class SelectQuestions extends AppCompatActivity {
         final String point50 = pst50.getText().toString();
         final String point100 = pst100.getText().toString();
 
+        myPoints.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                totalPoint = dataSnapshot.child("total_points").getValue().toString();
+                pointsInt = Integer.parseInt(totalPoint);
+                System.out.println("My Total points are " + pointsInt);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         if (logical != null && logical.equals("Logical")) {
-            myPoints.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String totalPoint = dataSnapshot.child("total_points").getValue().toString();
-                    pointsInt = Integer.parseInt(totalPoint);
-                    System.out.println("My Total points are " + pointsInt);
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-
-
-            {
                 pst10.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -99,7 +97,7 @@ public class SelectQuestions extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
 
-                            if (pointsInt >= 30 && pointsInt != 0) {
+                            if (pointsInt >= 15 && pointsInt != 0) {
                                 Intent logIntent = new Intent(SelectQuestions.this, LogicalActivity.class);
                                 logIntent.putExtra("30", "30");
                                 startActivity(logIntent);
@@ -116,7 +114,7 @@ public class SelectQuestions extends AppCompatActivity {
                     pst50.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            if (pointsInt >= 50 && pointsInt != 0) {
+                            if (pointsInt >= 25 && pointsInt != 0) {
                             Intent logIntent = new Intent(SelectQuestions.this, LogicalActivity.class);
                             logIntent.putExtra("50", "50");
                             startActivity(logIntent);
@@ -127,11 +125,11 @@ public class SelectQuestions extends AppCompatActivity {
 
                         }
                     });
-                }
+
                     pst100.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            if (pointsInt >= 100 && pointsInt != 0) {
+                            if (pointsInt >= 50 && pointsInt != 0) {
 
                                 Intent logIntent = new Intent(SelectQuestions.this, LogicalActivity.class);
                                 logIntent.putExtra("100", "100");
@@ -147,13 +145,28 @@ public class SelectQuestions extends AppCompatActivity {
             }
 
             if (analytical != null && analytical.equalsIgnoreCase("Analytical")) {
-                pst10.setOnClickListener(new View.OnClickListener() {
+
+
+
+
+
+
+                    pst10.setOnClickListener(new View.OnClickListener() {
+
+
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(SelectQuestions.this, "Analytical", Toast.LENGTH_SHORT).show();
-                        Intent logIntent = new Intent(SelectQuestions.this, AnalyticalActivity.class);
-                        logIntent.putExtra("10", "10");
-                        startActivity(logIntent);
+                        if (pointsInt >= 10 && pointsInt != 0) {
+                            Toast.makeText(SelectQuestions.this, "Analytical", Toast.LENGTH_SHORT).show();
+                            Intent logIntent = new Intent(SelectQuestions.this, AnalyticalActivity.class);
+                            logIntent.putExtra("10", "10");
+                            startActivity(logIntent);
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                        }
+
 
                     }
                 });
@@ -162,10 +175,16 @@ public class SelectQuestions extends AppCompatActivity {
                 pst30.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent logIntent = new Intent(SelectQuestions.this, AnalyticalActivity.class);
-                        logIntent.putExtra("30", "30");
-                        startActivity(logIntent);
+                        if (pointsInt >= 15 && pointsInt != 0) {
 
+                            Intent logIntent = new Intent(SelectQuestions.this, AnalyticalActivity.class);
+                            logIntent.putExtra("30", "30");
+                            startActivity(logIntent);
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                        }
                     }
                 });
 
@@ -173,10 +192,17 @@ public class SelectQuestions extends AppCompatActivity {
                 pst50.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent logIntent = new Intent(SelectQuestions.this, AnalyticalActivity.class);
+                        if (pointsInt >= 25 && pointsInt != 0) {
+
+                            Intent logIntent = new Intent(SelectQuestions.this, AnalyticalActivity.class);
                         logIntent.putExtra("50", "50");
                         startActivity(logIntent);
 
+                    }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                        }
                     }
                 });
 
@@ -184,22 +210,41 @@ public class SelectQuestions extends AppCompatActivity {
                 pst100.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent logIntent = new Intent(SelectQuestions.this, AnalyticalActivity.class);
-                        logIntent.putExtra("100", "100");
-                        startActivity(logIntent);
+                        if (pointsInt >= 25 && pointsInt != 0) {
+                            Intent logIntent = new Intent(SelectQuestions.this, AnalyticalActivity.class);
+                            logIntent.putExtra("100", "100");
+                            startActivity(logIntent);
 
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                        }
                     }
+
                 });
 
 
             }
             if (general != null && general.equalsIgnoreCase("General")) {
+
+
                 pst10.setOnClickListener(new View.OnClickListener() {
+
+
                     @Override
                     public void onClick(View view) {
-                        Intent logIntent = new Intent(SelectQuestions.this, GeneralActivity.class);
-                        logIntent.putExtra("10", "10");
-                        startActivity(logIntent);
+                        if (pointsInt >= 10 && pointsInt != 0) {
+                            Toast.makeText(SelectQuestions.this, "Analytical", Toast.LENGTH_SHORT).show();
+                            Intent logIntent = new Intent(SelectQuestions.this, GeneralActivity.class);
+                            logIntent.putExtra("10", "10");
+                            startActivity(logIntent);
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                        }
+
 
                     }
                 });
@@ -208,10 +253,16 @@ public class SelectQuestions extends AppCompatActivity {
                 pst30.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent logIntent = new Intent(SelectQuestions.this, GeneralActivity.class);
-                        logIntent.putExtra("30", "30");
-                        startActivity(logIntent);
+                        if (pointsInt >= 15 && pointsInt != 0) {
 
+                            Intent logIntent = new Intent(SelectQuestions.this, GeneralActivity.class);
+                            logIntent.putExtra("30", "30");
+                            startActivity(logIntent);
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                        }
                     }
                 });
 
@@ -219,10 +270,17 @@ public class SelectQuestions extends AppCompatActivity {
                 pst50.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent logIntent = new Intent(SelectQuestions.this, GeneralActivity.class);
-                        logIntent.putExtra("50", "50");
-                        startActivity(logIntent);
+                        if (pointsInt >= 25 && pointsInt != 0) {
 
+                            Intent logIntent = new Intent(SelectQuestions.this, GeneralActivity.class);
+                            logIntent.putExtra("50", "50");
+                            startActivity(logIntent);
+
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                        }
                     }
                 });
 
@@ -230,21 +288,39 @@ public class SelectQuestions extends AppCompatActivity {
                 pst100.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent logIntent = new Intent(SelectQuestions.this, GeneralActivity.class);
-                        logIntent.putExtra("100", "100");
-                        startActivity(logIntent);
+                        if (pointsInt >= 25 && pointsInt != 0) {
+                            Intent logIntent = new Intent(SelectQuestions.this, GeneralActivity.class);
+                            logIntent.putExtra("100", "100");
+                            startActivity(logIntent);
 
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                        }
                     }
+
                 });
+
 
             }
             if (etea != null && etea.equalsIgnoreCase("ETEA")) {
                 pst10.setOnClickListener(new View.OnClickListener() {
+
+
                     @Override
                     public void onClick(View view) {
-                        Intent logIntent = new Intent(SelectQuestions.this, EteaActivity.class);
-                        logIntent.putExtra("10", "10");
-                        startActivity(logIntent);
+                        if (pointsInt >= 10 && pointsInt != 0) {
+                            Toast.makeText(SelectQuestions.this, "Analytical", Toast.LENGTH_SHORT).show();
+                            Intent logIntent = new Intent(SelectQuestions.this, EteaActivity.class);
+                            logIntent.putExtra("10", "10");
+                            startActivity(logIntent);
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                        }
+
 
                     }
                 });
@@ -253,10 +329,16 @@ public class SelectQuestions extends AppCompatActivity {
                 pst30.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent logIntent = new Intent(SelectQuestions.this, EteaActivity.class);
-                        logIntent.putExtra("30", "30");
-                        startActivity(logIntent);
+                        if (pointsInt >= 15 && pointsInt != 0) {
 
+                            Intent logIntent = new Intent(SelectQuestions.this, EteaActivity.class);
+                            logIntent.putExtra("30", "30");
+                            startActivity(logIntent);
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                        }
                     }
                 });
 
@@ -264,10 +346,17 @@ public class SelectQuestions extends AppCompatActivity {
                 pst50.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent logIntent = new Intent(SelectQuestions.this, EteaActivity.class);
-                        logIntent.putExtra("50", "50");
-                        startActivity(logIntent);
+                        if (pointsInt >= 25 && pointsInt != 0) {
 
+                            Intent logIntent = new Intent(SelectQuestions.this, EteaActivity.class);
+                            logIntent.putExtra("50", "50");
+                            startActivity(logIntent);
+
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                        }
                     }
                 });
 
@@ -275,12 +364,20 @@ public class SelectQuestions extends AppCompatActivity {
                 pst100.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent logIntent = new Intent(SelectQuestions.this, EteaActivity.class);
-                        logIntent.putExtra("100", "100");
-                        startActivity(logIntent);
+                        if (pointsInt >= 25 && pointsInt != 0) {
+                            Intent logIntent = new Intent(SelectQuestions.this, EteaActivity.class);
+                            logIntent.putExtra("100", "100");
+                            startActivity(logIntent);
 
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Your Points are below the Selected Category", Toast.LENGTH_SHORT).show();
+
+                        }
                     }
+
                 });
+
             }
 
 
