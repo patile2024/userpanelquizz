@@ -2,6 +2,7 @@ package com.squadtech.userpanelquizapp.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.CountDownTimer;
@@ -23,6 +24,10 @@ import com.squadtech.userpanelquizapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class PagerAdapterClass extends PagerAdapter {
 
@@ -34,6 +39,11 @@ public class PagerAdapterClass extends PagerAdapter {
     public ArrayList<String> answersList = new ArrayList<String>();
     private boolean enabled;
     int localtime;
+String selected, correct ;
+int selectedInt , correctInt;
+     int counter = 0;
+    SharedPreferences myPoints  ;
+    SharedPreferences.Editor editor ;
     ArrayList<Integer> timeArray = new ArrayList<Integer>();
 
 
@@ -55,7 +65,6 @@ public class PagerAdapterClass extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
         View view = mLayoutInflate.inflate(R.layout.viewpaggerlayout, container, false);
-
 
         TextView questxt = (TextView) view.findViewById(R.id.questiontxt);
         final TextView option1 = (TextView) view.findViewById(R.id.option1);
@@ -83,6 +92,21 @@ public class PagerAdapterClass extends PagerAdapter {
                         if (answersList.size() > position && !answersList.get(position).equals("")) {
                             answersList.remove(position );
                         }
+                        selected = option1.getText().toString();
+                        correct = answer.getText().toString();
+
+
+                    if (selected.equals(correct))
+                    counter++ ;
+                        System.out.println("my points " + (++counter));
+
+
+
+
+                        SharedPreferences.Editor editor1 = context.getSharedPreferences("counter", MODE_PRIVATE).edit();
+                        editor1.putString("counter", String.valueOf(counter));
+
+                        editor1.apply();
 
 
                         answer.setVisibility(View.VISIBLE);
@@ -114,6 +138,18 @@ public class PagerAdapterClass extends PagerAdapter {
                         if (answersList.size() > position && !answersList.get(position).equals("")) {
                             answersList.remove(position );
                         }
+                        selected = option1.getText().toString();
+                        correct = answer.getText().toString();
+
+
+                        if (selected.equals(correct))
+                            counter++ ;
+
+
+                        SharedPreferences.Editor editor1 = context.getSharedPreferences("counter", MODE_PRIVATE).edit();
+                        editor1.putString("counter", String.valueOf(counter));
+
+                        editor1.apply();
 
 
                         answersList.add(position, option2.getText().toString());
@@ -138,6 +174,19 @@ public class PagerAdapterClass extends PagerAdapter {
                         if (answersList.size() > position && !answersList.get(position).equals("")) {
                             answersList.remove(position );
                         }
+
+                        selected = option1.getText().toString();
+                        correct = answer.getText().toString();
+
+
+                        if (selected.equals(correct))
+                            counter++ ;
+
+                        SharedPreferences.Editor editor1 = context.getSharedPreferences("counter", MODE_PRIVATE).edit();
+                        editor1.putString("counter", String.valueOf(counter));
+
+                        editor1.apply();
+
                         answersList.add(position, option3.getText().toString());
                         option3.setBackgroundColor(Color.GREEN);
                         option2.setBackgroundResource(R.drawable.textinputs);
@@ -161,6 +210,19 @@ public class PagerAdapterClass extends PagerAdapter {
                         if (answersList.size() > position && !answersList.get(position).equals("")) {
                             answersList.remove(position );
                         }
+
+                        selected = option1.getText().toString();
+                        correct = answer.getText().toString();
+
+
+                        if (selected.equals(correct))
+                            counter++ ;
+
+                        SharedPreferences.Editor editor1 = context.getSharedPreferences("counter", MODE_PRIVATE).edit();
+                        editor1.putString("counter", String.valueOf(counter));
+
+                        editor1.apply();
+
                         answersList.add(position, option4.getText().toString());
                         option4.setBackgroundColor(Color.GREEN);
                         option2.setBackgroundResource(R.drawable.textinputs);

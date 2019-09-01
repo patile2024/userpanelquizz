@@ -41,9 +41,17 @@
             android:layout_gravity="center"
             android:text="00:00"
             />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Points"
+    android:textSize="22sp"
+    android:layout_gravity="center"
+    android:textColor="@android:color/white"
+    android:id="@+id/quizPoints"
+    />
 
 
-            />
     </LinearLayout>
 
     <androidx.viewpager.widget.ViewPager
@@ -51,7 +59,9 @@
         android:layout_width="match_parent"
         android:layout_height="598dp"
         android:layout_below="@+id/topLinear"
-        android:layout_marginTop="21dp"></androidx.viewpager.widget.ViewPager>
+        android:layout_marginTop="21dp">
+
+    </androidx.viewpager.widget.ViewPager>
 
 
     <Button
@@ -66,5 +76,7 @@
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="20dp" />
+
+
 
 </RelativeLayout>

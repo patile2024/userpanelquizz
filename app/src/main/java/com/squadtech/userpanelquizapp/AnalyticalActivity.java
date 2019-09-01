@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Parcelable;
@@ -27,6 +29,7 @@ import com.squadtech.userpanelquizapp.Models.Questions;
 import com.squadtech.userpanelquizapp.Transformer.DepthPageTransformer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoader {
@@ -39,6 +42,7 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
     ViewPager viewPager;
     PagerAdapterClass adapter;
 
+
     private static final String STATE_LIST = "State Adapter Data";
 
     int pagenextnumber = 0;
@@ -48,22 +52,32 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
 
     int q10, q30,q50,q100;
     private Button nextBtn;
+    SharedPreferences pref;
+    TextView quizPoints;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analytical);
         databaseReference = FirebaseDatabase.getInstance().getReference("Questions").child("Categories").child("Analytical");
 
+
+
+        timer = (TextView)findViewById(R.id.timer);
+        quizPoints = (TextView)findViewById(R.id.quizPoints);
         viewPager = (ViewPager) findViewById(R.id.viewpaggerid);
         nextBtn = (Button)findViewById(R.id.nextBtn);
-
-
         firebaseLoader = this;
+
+
+
         try {
             get10pts = getIntent().getStringExtra("val" );
             q10 = Integer.parseInt(get10pts);
+
+
+
             switch (q10){
 
                 case 10 : {
@@ -71,11 +85,17 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
 
                         public void onTick(long millisUntilFinished) {
                             timer.setText("" + millisUntilFinished / 1000);
+
+                            SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
+
+                            String local = preferences.getString("counter", "zero");
+                            quizPoints.setText(local);
                         }
 
                         public void onFinish() {
                             timer.setText("Times Up!");
                             nextBtn.setEnabled(false);
+
                         }
                     }.start();
 
@@ -87,7 +107,10 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
                         public void onTick(long millisUntilFinished) {
                             timer.setText("" + millisUntilFinished / 1000);
                             nextBtn.setEnabled(false);
+                            SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
 
+                            String local = preferences.getString("counter", "zero");
+                            quizPoints.setText(local);
                         }
 
                         public void onFinish() {
@@ -104,6 +127,10 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
                         public void onTick(long millisUntilFinished) {
                             timer.setText("" + millisUntilFinished / 1000);
                             nextBtn.setEnabled(false);
+                            SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
+
+                            String local = preferences.getString("counter", "zero");
+                            quizPoints.setText(local);
                         }
 
                         public void onFinish() {
@@ -118,6 +145,10 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
                         public void onTick(long millisUntilFinished) {
                             timer.setText("seconds remaining: " + millisUntilFinished / 1000);
                             nextBtn.setEnabled(false);
+                            SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
+
+                            String local = preferences.getString("counter", "zero");
+                            quizPoints.setText(local);
                         }
 
                         public void onFinish() {
@@ -129,28 +160,11 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
                 }
 
             }
-
         }catch (Exception e){
 
         }
         loadData();
-
-
         viewPager.setPageTransformer(true, new DepthPageTransformer());
-
-
-        viewPager.setOnTouchListener(new View.OnTouchListener()
-
-
-        {
-            @Override
-            public boolean onTouch(View v, MotionEvent event)
-            {
-                return true;
-            }
-
-        });
-
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -168,12 +182,20 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
 
             }
         });
+        viewPager.setOnTouchListener(new View.OnTouchListener()
 
 
+        {
+            @Override
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                return true;
+            }
+
+        });
     }
 
     private void loadData() {
-
 
         try {
 
@@ -289,21 +311,14 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
         viewPager.setAdapter(adapter);
     }
 
-
-    @Override
-    public void onFirebaseLoadFailure(String message) {
-
-        Toast.makeText(this, "" + message, Toast.LENGTH_SHORT).show();
-    }
-
     public void next(View view) {
 
         viewPager.setCurrentItem(pagenextnumber + 1);
 
     }
-
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
+    public void onFirebaseLoadFailure(String message) {
+
+        Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
     }
 }
