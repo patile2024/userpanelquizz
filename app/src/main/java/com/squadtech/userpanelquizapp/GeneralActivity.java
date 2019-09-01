@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -32,7 +34,7 @@ public class GeneralActivity extends AppCompatActivity implements FirebaseLoader
     int pagenextnumber = 0;
     String get10pts,get30pts,get50pts,get100pts;
 
-
+    TextView timer ;
     int q10, q30,q50,q100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +51,70 @@ public class GeneralActivity extends AppCompatActivity implements FirebaseLoader
         try {
          get10pts = getIntent().getStringExtra("val" );
 
+            q10 = Integer.parseInt(get10pts);
+timer = (TextView)findViewById(R.id.timer);
+
+switch (q10){
+
+    case 10 : {
+        new CountDownTimer(420000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                timer.setText("done!");
+            }
+        }.start();
+
+        break;
+    }
+    case 30 :{
+        new CountDownTimer(900000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                timer.setText("done!");
+            }
+        }.start();
+        break;
+    }
+    case 50 : {
+        new CountDownTimer(1500000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                timer.setText("done!");
+            }
+        }.start();
+        break;
+    }
+    case 100: {
+        new CountDownTimer(5400000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                timer.setText("done!");
+            }
+        }.start();
+        break;
+    }
+
+}
 
 
 
 
-        q10 = Integer.parseInt(get10pts);
 }catch (Exception e){
 
 }
@@ -95,105 +156,106 @@ public class GeneralActivity extends AppCompatActivity implements FirebaseLoader
 
         try {
 
+            switch (q10){
+                case 10 : {
+                    databaseReference.limitToFirst(10).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
 
 
-if (q10 !=0 && q10 == 10){
-    databaseReference.limitToFirst(q10).addListenerForSingleValueEvent(new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                                questionsArrayList.add(ds.getValue(Questions.class));
+                                firebaseLoader.onFirebaseLoadSuccess(questionsArrayList);
+                                System.out.println("Snapshots " + ds.getValue());
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            firebaseLoader.onFirebaseLoadFailure(databaseError.getMessage());
+                        }
+                    });
+
+                    break;
+                }
+                case 30 : {
+                    databaseReference.limitToFirst(30).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
 
 
-                questionsArrayList.add(ds.getValue(Questions.class));
-                firebaseLoader.onFirebaseLoadSuccess(questionsArrayList);
-                System.out.println("Snapshots " + ds.getValue());
+                                questionsArrayList.add(ds.getValue(Questions.class));
+                                firebaseLoader.onFirebaseLoadSuccess(questionsArrayList);
+                                System.out.println("Snapshots " + ds.getValue());
 
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            firebaseLoader.onFirebaseLoadFailure(databaseError.getMessage());
+                        }
+                    });
+                    break;
+                }
+
+                case 50 :{
+                    databaseReference.limitToFirst(50).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+
+
+                                questionsArrayList.add(ds.getValue(Questions.class));
+                                firebaseLoader.onFirebaseLoadSuccess(questionsArrayList);
+                                System.out.println("Snapshots " + ds.getValue());
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            firebaseLoader.onFirebaseLoadFailure(databaseError.getMessage());
+                        }
+                    });
+                    break;
+
+                }
+                case 100: {
+                    databaseReference.limitToFirst(100).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+
+
+                                questionsArrayList.add(ds.getValue(Questions.class));
+                                firebaseLoader.onFirebaseLoadSuccess(questionsArrayList);
+                                System.out.println("Snapshots " + ds.getValue());
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            firebaseLoader.onFirebaseLoadFailure(databaseError.getMessage());
+                        }
+                    });
+                    break;
+                }
+
+                default: {
+                    Toast.makeText(this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                }
             }
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError databaseError) {
-            firebaseLoader.onFirebaseLoadFailure(databaseError.getMessage());
-        }
-    });
-
-}
-         if (q30 !=0 && q30 == 30){
-
-
-             System.out.println("30 limits");
-            databaseReference.limitToFirst(q30).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
-
-
-
-                        questionsArrayList.add(ds.getValue(Questions.class));
-                        firebaseLoader.onFirebaseLoadSuccess(questionsArrayList);
-                        System.out.println("Snapshots 30 " + ds.getValue());
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    firebaseLoader.onFirebaseLoadFailure(databaseError.getMessage());
-                }
-            });
-
-        }
-         if (q50 !=0 && q50 == 50){
-            databaseReference.limitToFirst(q50).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
-
-
-
-                        questionsArrayList.add(ds.getValue(Questions.class));
-                        firebaseLoader.onFirebaseLoadSuccess(questionsArrayList);
-                        System.out.println("Snapshots " + ds.getValue());
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    firebaseLoader.onFirebaseLoadFailure(databaseError.getMessage());
-                }
-            });
-
-        }
-        if (q100 !=0 && q100 == 100){
-            databaseReference.limitToFirst(q100).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
-
-
-
-                        questionsArrayList.add(ds.getValue(Questions.class));
-                        firebaseLoader.onFirebaseLoadSuccess(questionsArrayList);
-                        System.out.println("Snapshots " + ds.getValue());
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    firebaseLoader.onFirebaseLoadFailure(databaseError.getMessage());
-                }
-            });
-
-        }
-
-
 
         }catch (Exception e){
-                String getmessage ;
+            String getmessage ;
 
             Toast.makeText(this, "Error"+e.getMessage(), Toast.LENGTH_SHORT).show();
         }

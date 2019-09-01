@@ -3,10 +3,13 @@ package com.squadtech.userpanelquizapp.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Chronometer;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +33,8 @@ public class PagerAdapterClass extends PagerAdapter {
     public List<Questions> questionsArrayList;
     public ArrayList<String> answersList = new ArrayList<String>();
     private boolean enabled;
+    int localtime;
+    ArrayList<Integer> timeArray = new ArrayList<Integer>();
 
 
     public PagerAdapterClass() {
@@ -57,19 +62,19 @@ public class PagerAdapterClass extends PagerAdapter {
         final TextView option2 = (TextView) view.findViewById(R.id.option2);
         final TextView option3 = (TextView) view.findViewById(R.id.option3);
         final TextView option4 = (TextView) view.findViewById(R.id.option4);
+        final  TextView answer = (TextView)view.findViewById(R.id.answer);
 
 
         System.err.println("my data" + questionsArrayList.get(position).getQuestion());
-
-
         questxt.setText(questionsArrayList.get(position).getQuestion());
         option1.setText(questionsArrayList.get(position).getOpt1());
         option2.setText(questionsArrayList.get(position).getOpt2());
         option3.setText(questionsArrayList.get(position).getOpt3());
         option4.setText(questionsArrayList.get(position).getOpt4());
+        answer.setVisibility(View.GONE);
+//        timer.setText(questionsArrayList.get(position).getTime());
 
-
-                option1.setOnClickListener(new View.OnClickListener() {
+        option1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
@@ -80,12 +85,10 @@ public class PagerAdapterClass extends PagerAdapter {
                         }
 
 
+                        answer.setVisibility(View.VISIBLE);
+                        answer.setText(questionsArrayList.get(position).getAnswer());
                         answersList.add(position, option1.getText().toString());
-
-
-
                         option1.setBackgroundColor(Color.GREEN);
-
                         option2.setBackgroundResource(R.drawable.textinputs);
                         option3.setBackgroundResource(R.drawable.textinputs);
                         option4.setBackgroundResource(R.drawable.textinputs);
@@ -114,7 +117,8 @@ public class PagerAdapterClass extends PagerAdapter {
 
 
                         answersList.add(position, option2.getText().toString());
-
+                        answer.setText(questionsArrayList.get(position).getAnswer());
+                        answer.setVisibility(View.VISIBLE);
                         option2.setBackgroundColor(Color.GREEN);
                         option1.setBackgroundResource(R.drawable.textinputs);
                         option3.setBackgroundResource(R.drawable.textinputs);
@@ -124,8 +128,6 @@ public class PagerAdapterClass extends PagerAdapter {
                         option2.setClickable(false);
                         option3.setClickable(false);
                         option4.setClickable(false);
-
-
                         Toast.makeText(context, "Cliked " + position, Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -136,14 +138,13 @@ public class PagerAdapterClass extends PagerAdapter {
                         if (answersList.size() > position && !answersList.get(position).equals("")) {
                             answersList.remove(position );
                         }
-
-
                         answersList.add(position, option3.getText().toString());
                         option3.setBackgroundColor(Color.GREEN);
                         option2.setBackgroundResource(R.drawable.textinputs);
                         option1.setBackgroundResource(R.drawable.textinputs);
                         option4.setBackgroundResource(R.drawable.textinputs);
-
+                        answer.setText(questionsArrayList.get(position).getAnswer());
+                        answer.setVisibility(View.VISIBLE);
                         option1.setClickable(false);
                         option2.setClickable(false);
                         option3.setClickable(false);
@@ -160,29 +161,21 @@ public class PagerAdapterClass extends PagerAdapter {
                         if (answersList.size() > position && !answersList.get(position).equals("")) {
                             answersList.remove(position );
                         }
-
-
                         answersList.add(position, option4.getText().toString());
-
                         option4.setBackgroundColor(Color.GREEN);
-
                         option2.setBackgroundResource(R.drawable.textinputs);
                         option3.setBackgroundResource(R.drawable.textinputs);
                         option1.setBackgroundResource(R.drawable.textinputs);
-
-
+                        answer.setText(questionsArrayList.get(position).getAnswer());
+                        answer.setVisibility(View.VISIBLE);
                         option1.setClickable(false);
                         option2.setClickable(false);
                         option3.setClickable(false);
                         option4.setClickable(false);
                         System.out.println("Array list data " + answersList);
-
                         Toast.makeText(context, "Cliked " + position, Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
-
         container.addView(view);
 
         return view;

@@ -7,10 +7,12 @@ import androidx.viewpager.widget.ViewPager;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -41,6 +43,7 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
     int pagenextnumber = 0;
     String get10pts,get30pts,get50pts,get100pts;
 
+    TextView timer ;
 
     int q10, q30,q50,q100;
     @SuppressLint("ClickableViewAccessibility")
@@ -56,11 +59,69 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
         firebaseLoader = this;
         try {
             get10pts = getIntent().getStringExtra("val" );
-
-
-
-
             q10 = Integer.parseInt(get10pts);
+
+            timer = (TextView)findViewById(R.id.timer);
+
+            switch (q10){
+
+                case 10 : {
+                    new CountDownTimer(420000, 1000) {
+
+                        public void onTick(long millisUntilFinished) {
+                            timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                        }
+
+                        public void onFinish() {
+                            timer.setText("done!");
+                        }
+                    }.start();
+
+                    break;
+                }
+                case 30 :{
+                    new CountDownTimer(900000, 1000) {
+
+                        public void onTick(long millisUntilFinished) {
+                            timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                        }
+
+                        public void onFinish() {
+                            timer.setText("done!");
+                        }
+                    }.start();
+                    break;
+                }
+                case 50 : {
+                    new CountDownTimer(1500000, 1000) {
+
+                        public void onTick(long millisUntilFinished) {
+                            timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                        }
+
+                        public void onFinish() {
+                            timer.setText("done!");
+                        }
+                    }.start();
+                    break;
+                }
+                case 100: {
+                    new CountDownTimer(5400000, 1000) {
+
+                        public void onTick(long millisUntilFinished) {
+                            timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                        }
+
+                        public void onFinish() {
+                            timer.setText("done!");
+                        }
+                    }.start();
+                    break;
+                }
+
+            }
+
+
         }catch (Exception e){
 
         }

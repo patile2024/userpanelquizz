@@ -1,8 +1,12 @@
 package com.squadtech.userpanelquizapp.Models;
 
+import java.util.ArrayList;
+
 public class Questions {
 
-    String answer , opt1 , opt2,opt3,opt4 , question , time;
+    String answer , opt1 , opt2,opt3,opt4 , question ;
+
+    String time;
 
     public Questions() {
     }
