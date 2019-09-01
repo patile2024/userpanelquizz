@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -36,7 +37,7 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
     PagerAdapterClass adapter;
     int pagenextnumber = 0;
     String get10pts,get30pts,get50pts,get100pts;
-
+    Button nextBtn ;
     Chronometer totalTime ;
     int q10, q30,q50,q100;
     TextView timer;
@@ -48,7 +49,7 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
         databaseReference = FirebaseDatabase.getInstance().getReference("Questions").child("Categories").child("Logical");
 
         viewPager = (ViewPager) findViewById(R.id.viewpaggerid);
-
+        nextBtn = (Button)findViewById(R.id.nextBtn);
         firebaseLoader = this;
         timer = (TextView)findViewById(R.id.timer);
 
@@ -61,11 +62,12 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
                     new CountDownTimer(420000, 1000) {
 
                         public void onTick(long millisUntilFinished) {
-                            timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                            timer.setText("" + millisUntilFinished / 1000);
                         }
 
                         public void onFinish() {
-                            timer.setText("done!");
+                            timer.setText("Times Up!");
+                            nextBtn.setEnabled(false);
                         }
                     }.start();
 
@@ -75,11 +77,15 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
                     new CountDownTimer(900000, 1000) {
 
                         public void onTick(long millisUntilFinished) {
-                            timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                            timer.setText("" + millisUntilFinished / 1000);
+                            nextBtn.setEnabled(false);
+
                         }
 
                         public void onFinish() {
-                            timer.setText("done!");
+                            timer.setText("Times Up!");
+                            nextBtn.setEnabled(false);
+
                         }
                     }.start();
                     break;
@@ -88,11 +94,12 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
                     new CountDownTimer(1500000, 1000) {
 
                         public void onTick(long millisUntilFinished) {
-                            timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                            timer.setText("" + millisUntilFinished / 1000);
+                            nextBtn.setEnabled(false);
                         }
 
                         public void onFinish() {
-                            timer.setText("done!");
+                            timer.setText("Times Up!");
                         }
                     }.start();
                     break;
@@ -102,10 +109,12 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
 
                         public void onTick(long millisUntilFinished) {
                             timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                            nextBtn.setEnabled(false);
                         }
 
                         public void onFinish() {
                             timer.setText("done!");
+                            nextBtn.setEnabled(false);
                         }
                     }.start();
                     break;

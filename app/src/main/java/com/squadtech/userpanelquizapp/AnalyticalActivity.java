@@ -12,6 +12,7 @@ import android.os.Parcelable;
 import android.os.PersistableBundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,8 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
     TextView timer ;
 
     int q10, q30,q50,q100;
+    private Button nextBtn;
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,26 +57,25 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
         databaseReference = FirebaseDatabase.getInstance().getReference("Questions").child("Categories").child("Analytical");
 
         viewPager = (ViewPager) findViewById(R.id.viewpaggerid);
+        nextBtn = (Button)findViewById(R.id.nextBtn);
 
 
         firebaseLoader = this;
         try {
             get10pts = getIntent().getStringExtra("val" );
             q10 = Integer.parseInt(get10pts);
-
-            timer = (TextView)findViewById(R.id.timer);
-
             switch (q10){
 
                 case 10 : {
                     new CountDownTimer(420000, 1000) {
 
                         public void onTick(long millisUntilFinished) {
-                            timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                            timer.setText("" + millisUntilFinished / 1000);
                         }
 
                         public void onFinish() {
-                            timer.setText("done!");
+                            timer.setText("Times Up!");
+                            nextBtn.setEnabled(false);
                         }
                     }.start();
 
@@ -83,11 +85,15 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
                     new CountDownTimer(900000, 1000) {
 
                         public void onTick(long millisUntilFinished) {
-                            timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                            timer.setText("" + millisUntilFinished / 1000);
+                            nextBtn.setEnabled(false);
+
                         }
 
                         public void onFinish() {
-                            timer.setText("done!");
+                            timer.setText("Times Up!");
+                            nextBtn.setEnabled(false);
+
                         }
                     }.start();
                     break;
@@ -96,11 +102,12 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
                     new CountDownTimer(1500000, 1000) {
 
                         public void onTick(long millisUntilFinished) {
-                            timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                            timer.setText("" + millisUntilFinished / 1000);
+                            nextBtn.setEnabled(false);
                         }
 
                         public void onFinish() {
-                            timer.setText("done!");
+                            timer.setText("Times Up!");
                         }
                     }.start();
                     break;
@@ -110,17 +117,18 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
 
                         public void onTick(long millisUntilFinished) {
                             timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                            nextBtn.setEnabled(false);
                         }
 
                         public void onFinish() {
                             timer.setText("done!");
+                            nextBtn.setEnabled(false);
                         }
                     }.start();
                     break;
                 }
 
             }
-
 
         }catch (Exception e){
 

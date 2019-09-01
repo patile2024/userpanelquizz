@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,11 +39,14 @@ public class EteaActivity extends AppCompatActivity implements FirebaseLoader {
 
     int q10, q30,q50,q100;
     TextView timer;
+    private Button nextBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_etea);
 
+        nextBtn = (Button)findViewById(R.id.nextBtn);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Questions").child("Categories").child("ETEA");
 
@@ -52,22 +56,19 @@ public class EteaActivity extends AppCompatActivity implements FirebaseLoader {
 
         try {
             get10pts = getIntent().getStringExtra("val" );
-
- q10 = Integer.parseInt(get10pts);
-            timer = (TextView)findViewById(R.id.timer);
-
-
+            q10 = Integer.parseInt(get10pts);
             switch (q10){
 
                 case 10 : {
                     new CountDownTimer(420000, 1000) {
 
                         public void onTick(long millisUntilFinished) {
-                            timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                            timer.setText("" + millisUntilFinished / 1000);
                         }
 
                         public void onFinish() {
-                            timer.setText("done!");
+                            timer.setText("Times Up!");
+                            nextBtn.setEnabled(false);
                         }
                     }.start();
 
@@ -77,11 +78,15 @@ public class EteaActivity extends AppCompatActivity implements FirebaseLoader {
                     new CountDownTimer(900000, 1000) {
 
                         public void onTick(long millisUntilFinished) {
-                            timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                            timer.setText("" + millisUntilFinished / 1000);
+                            nextBtn.setEnabled(false);
+
                         }
 
                         public void onFinish() {
-                            timer.setText("done!");
+                            timer.setText("Times Up!");
+                            nextBtn.setEnabled(false);
+
                         }
                     }.start();
                     break;
@@ -90,11 +95,12 @@ public class EteaActivity extends AppCompatActivity implements FirebaseLoader {
                     new CountDownTimer(1500000, 1000) {
 
                         public void onTick(long millisUntilFinished) {
-                            timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                            timer.setText("" + millisUntilFinished / 1000);
+                            nextBtn.setEnabled(false);
                         }
 
                         public void onFinish() {
-                            timer.setText("done!");
+                            timer.setText("Times Up!");
                         }
                     }.start();
                     break;
@@ -104,17 +110,18 @@ public class EteaActivity extends AppCompatActivity implements FirebaseLoader {
 
                         public void onTick(long millisUntilFinished) {
                             timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                            nextBtn.setEnabled(false);
                         }
 
                         public void onFinish() {
                             timer.setText("done!");
+                            nextBtn.setEnabled(false);
                         }
                     }.start();
                     break;
                 }
 
             }
-
 
         }catch (Exception e){
 

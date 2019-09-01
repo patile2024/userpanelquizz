@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,8 @@ public class GeneralActivity extends AppCompatActivity implements FirebaseLoader
 
     TextView timer ;
     int q10, q30,q50,q100;
+    private Button nextBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,72 +49,77 @@ public class GeneralActivity extends AppCompatActivity implements FirebaseLoader
 
         viewPager = (ViewPager) findViewById(R.id.viewpaggerid);
 
+        nextBtn = (Button)findViewById(R.id.nextBtn);
 
         firebaseLoader = this;
         try {
-         get10pts = getIntent().getStringExtra("val" );
-
+            get10pts = getIntent().getStringExtra("val" );
             q10 = Integer.parseInt(get10pts);
-timer = (TextView)findViewById(R.id.timer);
+            switch (q10){
 
-switch (q10){
+                case 10 : {
+                    new CountDownTimer(420000, 1000) {
 
-    case 10 : {
-        new CountDownTimer(420000, 1000) {
+                        public void onTick(long millisUntilFinished) {
+                            timer.setText("" + millisUntilFinished / 1000);
+                        }
 
-            public void onTick(long millisUntilFinished) {
-                timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                        public void onFinish() {
+                            timer.setText("Times Up!");
+                            nextBtn.setEnabled(false);
+                        }
+                    }.start();
+
+                    break;
+                }
+                case 30 :{
+                    new CountDownTimer(900000, 1000) {
+
+                        public void onTick(long millisUntilFinished) {
+                            timer.setText("" + millisUntilFinished / 1000);
+                            nextBtn.setEnabled(false);
+
+                        }
+
+                        public void onFinish() {
+                            timer.setText("Times Up!");
+                            nextBtn.setEnabled(false);
+
+                        }
+                    }.start();
+                    break;
+                }
+                case 50 : {
+                    new CountDownTimer(1500000, 1000) {
+
+                        public void onTick(long millisUntilFinished) {
+                            timer.setText("" + millisUntilFinished / 1000);
+                            nextBtn.setEnabled(false);
+                        }
+
+                        public void onFinish() {
+                            timer.setText("Times Up!");
+                        }
+                    }.start();
+                    break;
+                }
+                case 100: {
+                    new CountDownTimer(5400000, 1000) {
+
+                        public void onTick(long millisUntilFinished) {
+                            timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                            nextBtn.setEnabled(false);
+                        }
+
+                        public void onFinish() {
+                            timer.setText("done!");
+                            nextBtn.setEnabled(false);
+                        }
+                    }.start();
+                    break;
+                }
+
             }
-
-            public void onFinish() {
-                timer.setText("done!");
-            }
-        }.start();
-
-        break;
-    }
-    case 30 :{
-        new CountDownTimer(900000, 1000) {
-
-            public void onTick(long millisUntilFinished) {
-                timer.setText("seconds remaining: " + millisUntilFinished / 1000);
-            }
-
-            public void onFinish() {
-                timer.setText("done!");
-            }
-        }.start();
-        break;
-    }
-    case 50 : {
-        new CountDownTimer(1500000, 1000) {
-
-            public void onTick(long millisUntilFinished) {
-                timer.setText("seconds remaining: " + millisUntilFinished / 1000);
-            }
-
-            public void onFinish() {
-                timer.setText("done!");
-            }
-        }.start();
-        break;
-    }
-    case 100: {
-        new CountDownTimer(5400000, 1000) {
-
-            public void onTick(long millisUntilFinished) {
-                timer.setText("seconds remaining: " + millisUntilFinished / 1000);
-            }
-
-            public void onFinish() {
-                timer.setText("done!");
-            }
-        }.start();
-        break;
-    }
-
-}
-
 
 
 
