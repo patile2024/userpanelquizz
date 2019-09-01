@@ -106,7 +106,6 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
 
                         public void onTick(long millisUntilFinished) {
                             timer.setText("" + millisUntilFinished / 1000);
-                            nextBtn.setEnabled(false);
                             SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
 
                             String local = preferences.getString("counter", "zero");
@@ -126,7 +125,6 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
 
                         public void onTick(long millisUntilFinished) {
                             timer.setText("" + millisUntilFinished / 1000);
-                            nextBtn.setEnabled(false);
                             SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
 
                             String local = preferences.getString("counter", "zero");
@@ -144,7 +142,6 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
 
                         public void onTick(long millisUntilFinished) {
                             timer.setText("seconds remaining: " + millisUntilFinished / 1000);
-                            nextBtn.setEnabled(false);
                             SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
 
                             String local = preferences.getString("counter", "zero");

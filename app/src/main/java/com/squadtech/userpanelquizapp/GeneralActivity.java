@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MotionEvent;
@@ -38,6 +39,7 @@ public class GeneralActivity extends AppCompatActivity implements FirebaseLoader
     TextView timer ;
     int q10, q30,q50,q100;
     private Button nextBtn;
+    TextView quizPoints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +53,17 @@ public class GeneralActivity extends AppCompatActivity implements FirebaseLoader
 
         nextBtn = (Button)findViewById(R.id.nextBtn);
 
+        timer = (TextView)findViewById(R.id.timer);
+
+        quizPoints = (TextView)findViewById(R.id.quizPoints);
+
         firebaseLoader = this;
         try {
             get10pts = getIntent().getStringExtra("val" );
             q10 = Integer.parseInt(get10pts);
+
+
+
             switch (q10){
 
                 case 10 : {
@@ -62,11 +71,17 @@ public class GeneralActivity extends AppCompatActivity implements FirebaseLoader
 
                         public void onTick(long millisUntilFinished) {
                             timer.setText("" + millisUntilFinished / 1000);
+
+                            SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
+
+                            String local = preferences.getString("counter", "zero");
+                            quizPoints.setText(local);
                         }
 
                         public void onFinish() {
                             timer.setText("Times Up!");
                             nextBtn.setEnabled(false);
+
                         }
                     }.start();
 
@@ -77,8 +92,10 @@ public class GeneralActivity extends AppCompatActivity implements FirebaseLoader
 
                         public void onTick(long millisUntilFinished) {
                             timer.setText("" + millisUntilFinished / 1000);
-                            nextBtn.setEnabled(false);
+                            SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
 
+                            String local = preferences.getString("counter", "zero");
+                            quizPoints.setText(local);
                         }
 
                         public void onFinish() {
@@ -94,7 +111,10 @@ public class GeneralActivity extends AppCompatActivity implements FirebaseLoader
 
                         public void onTick(long millisUntilFinished) {
                             timer.setText("" + millisUntilFinished / 1000);
-                            nextBtn.setEnabled(false);
+                            SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
+
+                            String local = preferences.getString("counter", "zero");
+                            quizPoints.setText(local);
                         }
 
                         public void onFinish() {
@@ -108,7 +128,10 @@ public class GeneralActivity extends AppCompatActivity implements FirebaseLoader
 
                         public void onTick(long millisUntilFinished) {
                             timer.setText("seconds remaining: " + millisUntilFinished / 1000);
-                            nextBtn.setEnabled(false);
+                            SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
+
+                            String local = preferences.getString("counter", "zero");
+                            quizPoints.setText(local);
                         }
 
                         public void onFinish() {
@@ -120,12 +143,9 @@ public class GeneralActivity extends AppCompatActivity implements FirebaseLoader
                 }
 
             }
+        }catch (Exception e){
 
-
-
-}catch (Exception e){
-
-}
+        }
         loadData();
         viewPager.setPageTransformer(true, new DepthPageTransformer());
 
