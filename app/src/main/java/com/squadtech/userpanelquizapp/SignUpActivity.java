@@ -113,7 +113,7 @@ public class SignUpActivity extends AppCompatActivity {
                     userMap.put("user_uid", FirebaseAuth.getInstance().getUid());
                     userMap.put("user_dp" , "default");
                     userMap.put("registered_date",SaveCurrentDate );
-                    userMap.put("total_points" ,"10");
+                    userMap.put("total_points" ,"100");
 
                     mProgress.dismiss();
                     mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {

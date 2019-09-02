@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,6 +38,7 @@ public class EteaActivity extends AppCompatActivity implements FirebaseLoader {
     int pagenextnumber = 0;
     String get10pts,get30pts,get50pts,get100pts;
 
+    DatabaseReference pointRef;
 
     int q10, q30,q50,q100;
     TextView timer;
@@ -58,6 +60,9 @@ public class EteaActivity extends AppCompatActivity implements FirebaseLoader {
         timer = (TextView)findViewById(R.id.timer);
 
         quizPoints = (TextView)findViewById(R.id.quizPoints);
+
+        pointRef = FirebaseDatabase.getInstance().getReference("QuizPoints").child(FirebaseAuth.getInstance().getUid()).child("Analytical").push();
+
         try {
             get10pts = getIntent().getStringExtra("val" );
             q10 = Integer.parseInt(get10pts);

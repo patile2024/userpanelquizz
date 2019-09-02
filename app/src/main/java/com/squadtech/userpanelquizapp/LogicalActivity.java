@@ -15,6 +15,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,6 +44,7 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
     int q10, q30,q50,q100;
     TextView timer;
     TextView quizPoints;
+    DatabaseReference pointRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,9 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
         timer = (TextView)findViewById(R.id.timer);
 
         quizPoints = (TextView)findViewById(R.id.quizPoints);
+
+        pointRef = FirebaseDatabase.getInstance().getReference("QuizPoints").child(FirebaseAuth.getInstance().getUid()).child("Analytical").push();
+
         try {
             get10pts = getIntent().getStringExtra("val" );
             q10 = Integer.parseInt(get10pts);

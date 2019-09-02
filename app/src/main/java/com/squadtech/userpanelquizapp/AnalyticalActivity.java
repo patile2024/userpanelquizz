@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,9 +29,13 @@ import com.squadtech.userpanelquizapp.Interface.FirebaseLoader;
 import com.squadtech.userpanelquizapp.Models.Questions;
 import com.squadtech.userpanelquizapp.Transformer.DepthPageTransformer;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoader {
 
@@ -41,8 +46,10 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
     public List<Questions> questionsArrayList = new ArrayList<>();
     ViewPager viewPager;
     PagerAdapterClass adapter;
-
-
+    DatabaseReference pointRef;
+   static String previousPoints;
+   Button submitBtn;
+    String local;
     private static final String STATE_LIST = "State Adapter Data";
 
     int pagenextnumber = 0;
@@ -63,13 +70,14 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
         databaseReference = FirebaseDatabase.getInstance().getReference("Questions").child("Categories").child("Analytical");
 
 
-
+        submitBtn = (Button)findViewById(R.id.subBtn);
         timer = (TextView)findViewById(R.id.timer);
         quizPoints = (TextView)findViewById(R.id.quizPoints);
         viewPager = (ViewPager) findViewById(R.id.viewpaggerid);
         nextBtn = (Button)findViewById(R.id.nextBtn);
         firebaseLoader = this;
 
+        pointRef = FirebaseDatabase.getInstance().getReference("QuizPoints").child(FirebaseAuth.getInstance().getUid()).child("Analytical").push();
 
 
         try {
@@ -87,8 +95,7 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
                             timer.setText("" + millisUntilFinished / 1000);
 
                             SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
-
-                            String local = preferences.getString("counter", "zero");
+                             local = preferences.getString("counter", "zero");
                             quizPoints.setText(local);
                         }
 
@@ -99,6 +106,17 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
                         }
                     }.start();
 
+                    submitBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            HashMap<String , Object> pointsMap = new HashMap<>();
+                            System.out.println("val of local var "+ quizPoints.getText().toString() );
+                            String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                            pointsMap.put("out_of_ten" , quizPoints.getText().toString());
+                            pointsMap.put("submited_date", currentDate);
+                            pointRef.setValue(pointsMap);
+                        }
+                    });
                     break;
                 }
                 case 30 :{
@@ -118,6 +136,17 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
 
                         }
                     }.start();
+                    submitBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            HashMap<String , Object> pointsMap = new HashMap<>();
+                            System.out.println("val of local var "+ quizPoints.getText().toString() );
+                            String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                            pointsMap.put("out_of_ten" , quizPoints.getText().toString());
+                            pointsMap.put("submited_date", currentDate);
+                            pointRef.setValue(pointsMap);
+                        }
+                    });
                     break;
                 }
                 case 50 : {
@@ -133,8 +162,20 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
 
                         public void onFinish() {
                             timer.setText("Times Up!");
-                        }
+                            nextBtn.setEnabled(false);                        }
                     }.start();
+
+                    submitBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            HashMap<String , Object> pointsMap = new HashMap<>();
+                            System.out.println("val of local var "+ quizPoints.getText().toString() );
+                            String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                            pointsMap.put("out_of_ten" , quizPoints.getText().toString());
+                            pointsMap.put("submited_date", currentDate);
+                            pointRef.setValue(pointsMap);
+                        }
+                    });
                     break;
                 }
                 case 100: {
@@ -153,8 +194,22 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
                             nextBtn.setEnabled(false);
                         }
                     }.start();
+
+                    submitBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            HashMap<String , Object> pointsMap = new HashMap<>();
+                            System.out.println("val of local var "+ quizPoints.getText().toString() );
+                            String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                            pointsMap.put("out_of_ten" , quizPoints.getText().toString());
+                            pointsMap.put("submited_date", currentDate);
+                            pointRef.setValue(pointsMap);
+                        }
+                    });
                     break;
                 }
+
+
 
             }
         }catch (Exception e){
