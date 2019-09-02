@@ -67,7 +67,7 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
 
         quizPoints = (TextView)findViewById(R.id.quizPoints);
 
-        pointRef = FirebaseDatabase.getInstance().getReference("QuizPoints").child(FirebaseAuth.getInstance().getUid()).child("etea").push();
+        pointRef = FirebaseDatabase.getInstance().getReference("QuizPoints").child(FirebaseAuth.getInstance().getUid()).push();
 
         try {
             get10pts = getIntent().getStringExtra("val" );

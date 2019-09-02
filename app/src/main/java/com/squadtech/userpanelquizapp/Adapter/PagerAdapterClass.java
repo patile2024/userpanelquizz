@@ -111,7 +111,7 @@ int selectedInt , correctInt;
 
                         answer.setVisibility(View.VISIBLE);
                         answer.setText(questionsArrayList.get(position).getAnswer());
-                        answersList.add(position, option1.getText().toString());
+//                        answersList.add(position, option1.getText().toString());
                         option1.setBackgroundColor(Color.GREEN);
                         option2.setBackgroundResource(R.drawable.textinputs);
                         option3.setBackgroundResource(R.drawable.textinputs);
@@ -152,7 +152,7 @@ int selectedInt , correctInt;
                         editor1.apply();
 
 
-                        answersList.add(position, option2.getText().toString());
+                      //  answersList.add(position, option2.getText().toString());
                         answer.setText(questionsArrayList.get(position).getAnswer());
                         answer.setVisibility(View.VISIBLE);
                         option2.setBackgroundColor(Color.GREEN);
@@ -187,7 +187,7 @@ int selectedInt , correctInt;
 
                         editor1.apply();
 
-                        answersList.add(position, option3.getText().toString());
+                       // answersList.add(position, option3.getText().toString());
                         option3.setBackgroundColor(Color.GREEN);
                         option2.setBackgroundResource(R.drawable.textinputs);
                         option1.setBackgroundResource(R.drawable.textinputs);
@@ -223,7 +223,7 @@ int selectedInt , correctInt;
 
                         editor1.apply();
 
-                        answersList.add(position, option4.getText().toString());
+                        //answersList.add(position, option4.getText().toString());
                         option4.setBackgroundColor(Color.GREEN);
                         option2.setBackgroundResource(R.drawable.textinputs);
                         option3.setBackgroundResource(R.drawable.textinputs);

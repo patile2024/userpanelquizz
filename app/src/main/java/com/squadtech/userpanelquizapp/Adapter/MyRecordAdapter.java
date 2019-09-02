@@ -37,6 +37,8 @@ public class MyRecordAdapter extends RecyclerView.Adapter<MyRecordAdapter.ViewHo
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(mContext).inflate(R.layout.recordview, parent, false);
+
+        ViewHolder holder = new ViewHolder(view);
         return new ViewHolder(view);
     }
 
@@ -49,7 +51,7 @@ public class MyRecordAdapter extends RecyclerView.Adapter<MyRecordAdapter.ViewHo
         holder.date.setText(model.getSubmited_date());
 
 
-        System.out.println("Bind view " + model.getAchived_marks());
+        System.out.println("Bind view " + myRecord.get(position));
 
 
 
@@ -57,20 +59,18 @@ public class MyRecordAdapter extends RecyclerView.Adapter<MyRecordAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return 0;
+        return myRecord.size();
     }
 
     public  class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView cat,total, achived ,date  ;
+        public TextView cat,total, achived ,date;
 
 
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             cat = itemView.findViewById(R.id.categoryview);
-
             total = itemView.findViewById(R.id.totalpointView);
             achived = itemView.findViewById(R.id.achivedView);
             date = itemView.findViewById(R.id.dateView);

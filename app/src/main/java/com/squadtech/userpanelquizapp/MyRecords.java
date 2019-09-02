@@ -23,13 +23,13 @@ import com.squadtech.userpanelquizapp.Models.QuizPoints;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyRecords extends AppCompatActivity   {
+public class MyRecords extends AppCompatActivity implements FirebaseRecordLoader {
     private RecyclerView myRecordView;
     private ArrayList<QuizPoints> arrayList ;
     private MyRecordAdapter adapter;
     DatabaseReference dbReference;
 
-
+    FirebaseRecordLoader firebaseRecordLoader;
 
 
 
@@ -38,7 +38,7 @@ public class MyRecords extends AppCompatActivity   {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_records);
 
-        dbReference = FirebaseDatabase.getInstance().getReference("QuizPoints").child(FirebaseAuth.getInstance().getUid()).child("analytical");
+        dbReference = FirebaseDatabase.getInstance().getReference("QuizPoints").child(FirebaseAuth.getInstance().getUid());
 
         myRecordView = findViewById(R.id.myRecView);
         myRecordView.hasFixedSize();
@@ -46,7 +46,7 @@ public class MyRecords extends AppCompatActivity   {
 
         arrayList = new ArrayList<>();
 
-
+        firebaseRecordLoader = this;
         dbReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
@@ -60,8 +60,9 @@ public class MyRecords extends AppCompatActivity   {
                 }
                 adapter = new MyRecordAdapter(getApplicationContext(), arrayList);
                 myRecordView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
 
+                myRecordView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                adapter.notifyDataSetChanged();
 
             }
 
@@ -73,5 +74,15 @@ public class MyRecords extends AppCompatActivity   {
     }
 
 
+    @Override
+    public void onFirebaseLoadSuccess(List<QuizPoints> arrayList) {
+        adapter = new MyRecordAdapter(getApplicationContext(), arrayList);
+        myRecordView.setAdapter(adapter);
 
+    }
+
+    @Override
+    public void onFirebaseLoadFailure(String message) {
+
+    }
 }

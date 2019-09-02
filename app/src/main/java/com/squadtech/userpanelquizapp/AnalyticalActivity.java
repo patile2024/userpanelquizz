@@ -77,7 +77,7 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
         nextBtn = (Button)findViewById(R.id.nextBtn);
         firebaseLoader = this;
 
-        pointRef = FirebaseDatabase.getInstance().getReference("QuizPoints").child(FirebaseAuth.getInstance().getUid()).child("analytical").push();
+        pointRef = FirebaseDatabase.getInstance().getReference("QuizPoints").child(FirebaseAuth.getInstance().getUid()).push();
 
 
         try {

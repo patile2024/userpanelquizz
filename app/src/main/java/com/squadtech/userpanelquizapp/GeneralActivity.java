@@ -66,7 +66,7 @@ public class GeneralActivity extends AppCompatActivity implements FirebaseLoader
 
         quizPoints = (TextView)findViewById(R.id.quizPoints);
 
-        pointRef = FirebaseDatabase.getInstance().getReference("QuizPoints").child(FirebaseAuth.getInstance().getUid()).child("general").push();
+        pointRef = FirebaseDatabase.getInstance().getReference("QuizPoints").child(FirebaseAuth.getInstance().getUid()).push();
 
 
         firebaseLoader = this;
