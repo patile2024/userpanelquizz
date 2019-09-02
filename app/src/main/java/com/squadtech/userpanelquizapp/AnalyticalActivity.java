@@ -77,7 +77,7 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
         nextBtn = (Button)findViewById(R.id.nextBtn);
         firebaseLoader = this;
 
-        pointRef = FirebaseDatabase.getInstance().getReference("QuizPoints").child(FirebaseAuth.getInstance().getUid()).child("Analytical").push();
+        pointRef = FirebaseDatabase.getInstance().getReference("QuizPoints").child(FirebaseAuth.getInstance().getUid()).child("analytical").push();
 
 
         try {
@@ -112,8 +112,10 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
                             HashMap<String , Object> pointsMap = new HashMap<>();
                             System.out.println("val of local var "+ quizPoints.getText().toString() );
                             String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-                            pointsMap.put("out_of_ten" , quizPoints.getText().toString());
+                            pointsMap.put("achived_marks" , quizPoints.getText().toString());
                             pointsMap.put("submited_date", currentDate);
+                            pointsMap.put("total_marks", "10");
+                            pointsMap.put("category" ,"analytical");
                             pointRef.setValue(pointsMap);
                         }
                     });
@@ -142,8 +144,10 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
                             HashMap<String , Object> pointsMap = new HashMap<>();
                             System.out.println("val of local var "+ quizPoints.getText().toString() );
                             String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-                            pointsMap.put("out_of_ten" , quizPoints.getText().toString());
+                            pointsMap.put("achived_marks" , quizPoints.getText().toString());
                             pointsMap.put("submited_date", currentDate);
+                            pointsMap.put("total_marks", "30");
+                            pointsMap.put("category" ,"analytical");
                             pointRef.setValue(pointsMap);
                         }
                     });
@@ -171,8 +175,10 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
                             HashMap<String , Object> pointsMap = new HashMap<>();
                             System.out.println("val of local var "+ quizPoints.getText().toString() );
                             String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-                            pointsMap.put("out_of_ten" , quizPoints.getText().toString());
+                            pointsMap.put("achived_marks" , quizPoints.getText().toString());
                             pointsMap.put("submited_date", currentDate);
+                            pointsMap.put("total_marks", "50");
+                            pointsMap.put("category" ,"analytical");
                             pointRef.setValue(pointsMap);
                         }
                     });
@@ -201,8 +207,10 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
                             HashMap<String , Object> pointsMap = new HashMap<>();
                             System.out.println("val of local var "+ quizPoints.getText().toString() );
                             String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-                            pointsMap.put("out_of_ten" , quizPoints.getText().toString());
+                            pointsMap.put("achived_marks" , quizPoints.getText().toString());
                             pointsMap.put("submited_date", currentDate);
+                            pointsMap.put("total_marks", "100");
+                            pointsMap.put("category" ,"analytical");
                             pointRef.setValue(pointsMap);
                         }
                     });

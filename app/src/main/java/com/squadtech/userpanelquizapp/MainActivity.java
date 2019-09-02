@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squadtech.userpanelquizapp.Adapter.MyRecordAdapter;
 import com.squadtech.userpanelquizapp.Profile.ProfileActivity;
 import com.squareup.picasso.Picasso;
 
@@ -187,7 +188,7 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_quiz_contest)
         {
-
+            startActivity(new Intent(MainActivity.this , MyRecords.class));
         }
         else if (id == R.id.nav_Timer_quiz)
         {

@@ -25,8 +25,12 @@ import com.squadtech.userpanelquizapp.Models.Questions;
 import com.squadtech.userpanelquizapp.R;
 import com.squadtech.userpanelquizapp.Transformer.DepthPageTransformer;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class EteaActivity extends AppCompatActivity implements FirebaseLoader {
     DatabaseReference databaseReference;
@@ -44,6 +48,8 @@ public class EteaActivity extends AppCompatActivity implements FirebaseLoader {
     TextView timer;
     private Button nextBtn;
     TextView quizPoints;
+    private Button submitBtn;
+    String local;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,15 +64,15 @@ public class EteaActivity extends AppCompatActivity implements FirebaseLoader {
 
         firebaseLoader = this;
         timer = (TextView)findViewById(R.id.timer);
+        submitBtn = (Button)findViewById(R.id.subBtn);
 
         quizPoints = (TextView)findViewById(R.id.quizPoints);
 
-        pointRef = FirebaseDatabase.getInstance().getReference("QuizPoints").child(FirebaseAuth.getInstance().getUid()).child("Analytical").push();
+        pointRef = FirebaseDatabase.getInstance().getReference("QuizPoints").child(FirebaseAuth.getInstance().getUid()).child("etea").push();
 
         try {
             get10pts = getIntent().getStringExtra("val" );
             q10 = Integer.parseInt(get10pts);
-
 
 
             switch (q10){
@@ -78,8 +84,7 @@ public class EteaActivity extends AppCompatActivity implements FirebaseLoader {
                             timer.setText("" + millisUntilFinished / 1000);
 
                             SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
-
-                            String local = preferences.getString("counter", "zero");
+                            local = preferences.getString("counter", "zero");
                             quizPoints.setText(local);
                         }
 
@@ -90,6 +95,19 @@ public class EteaActivity extends AppCompatActivity implements FirebaseLoader {
                         }
                     }.start();
 
+                    submitBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            HashMap<String , Object> pointsMap = new HashMap<>();
+                            System.out.println("val of local var "+ quizPoints.getText().toString() );
+                            String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                            pointsMap.put("achived_marks" , quizPoints.getText().toString());
+                            pointsMap.put("submited_date", currentDate);
+                            pointsMap.put("total_marks", "10");
+                            pointsMap.put("category" ,"Etea");
+                            pointRef.setValue(pointsMap);
+                        }
+                    });
                     break;
                 }
                 case 30 :{
@@ -109,6 +127,19 @@ public class EteaActivity extends AppCompatActivity implements FirebaseLoader {
 
                         }
                     }.start();
+                    submitBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            HashMap<String , Object> pointsMap = new HashMap<>();
+                            System.out.println("val of local var "+ quizPoints.getText().toString() );
+                            String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                            pointsMap.put("achived_marks" , quizPoints.getText().toString());
+                            pointsMap.put("submited_date", currentDate);
+                            pointsMap.put("total_marks", "30");
+                            pointsMap.put("category" ,"Etea");
+                            pointRef.setValue(pointsMap);
+                        }
+                    });
                     break;
                 }
                 case 50 : {
@@ -124,8 +155,22 @@ public class EteaActivity extends AppCompatActivity implements FirebaseLoader {
 
                         public void onFinish() {
                             timer.setText("Times Up!");
-                        }
+                            nextBtn.setEnabled(false);                        }
                     }.start();
+
+                    submitBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            HashMap<String , Object> pointsMap = new HashMap<>();
+                            System.out.println("val of local var "+ quizPoints.getText().toString() );
+                            String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                            pointsMap.put("achived_marks" , quizPoints.getText().toString());
+                            pointsMap.put("submited_date", currentDate);
+                            pointsMap.put("total_marks", "50");
+                            pointsMap.put("category" ,"Etea");
+                            pointRef.setValue(pointsMap);
+                        }
+                    });
                     break;
                 }
                 case 100: {
@@ -144,8 +189,24 @@ public class EteaActivity extends AppCompatActivity implements FirebaseLoader {
                             nextBtn.setEnabled(false);
                         }
                     }.start();
+
+                    submitBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            HashMap<String , Object> pointsMap = new HashMap<>();
+                            System.out.println("val of local var "+ quizPoints.getText().toString() );
+                            String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                            pointsMap.put("achived_marks" , quizPoints.getText().toString());
+                            pointsMap.put("submited_date", currentDate);
+                            pointsMap.put("total_marks", "100");
+                            pointsMap.put("category" ,"Etea");
+                            pointRef.setValue(pointsMap);
+                        }
+                    });
                     break;
                 }
+
+
 
             }
         }catch (Exception e){
