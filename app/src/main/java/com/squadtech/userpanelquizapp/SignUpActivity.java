@@ -98,11 +98,12 @@ public class SignUpActivity extends AppCompatActivity {
 
                 if (task.isSuccessful()){
 
-                    String SaveCurrentDate;
-
-                    Calendar calendar = Calendar.getInstance();
-                    SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
-                    SaveCurrentDate = currentDate.format(calendar.getTime());
+//                    String SaveCurrentDate;
+//
+//                    Calendar calendar = Calendar.getInstance();
+//                    SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+//                    SaveCurrentDate = currentDate.format(calendar.getTime());
+                    final String date = DateFormat.getDateInstance().format(new Date());
 
 
                     mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getUid());
@@ -113,7 +114,7 @@ public class SignUpActivity extends AppCompatActivity {
                     userMap.put("user_pass" , sPass);
                     userMap.put("user_uid", FirebaseAuth.getInstance().getUid());
                     userMap.put("user_dp" , "default");
-                    userMap.put("registered_date",SaveCurrentDate );
+                    userMap.put("registered_date",date );
                     userMap.put("total_points" ,"100");
 
                     mProgress.dismiss();
