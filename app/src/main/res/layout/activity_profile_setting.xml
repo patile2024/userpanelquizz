@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_profile"
+            android:id="@+id/currentProfileImage"
             />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -42,6 +43,7 @@
         android:gravity="center"
         android:hint="user_@email.com"
         android:textSize="18dp"
+        android:id="@+id/myEmailtxt"
         android:layout_marginTop="10dp"
         android:textAlignment="center"
         />

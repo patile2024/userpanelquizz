@@ -4,14 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Parcelable;
+import android.os.PersistableBundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Chronometer;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,12 +31,14 @@ import com.squadtech.userpanelquizapp.Transformer.DepthPageTransformer;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public class LogicalActivity extends AppCompatActivity implements FirebaseLoader {
+public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoader {
+
 
     DatabaseReference databaseReference;
 
@@ -41,33 +46,39 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
     public List<Questions> questionsArrayList = new ArrayList<>();
     ViewPager viewPager;
     PagerAdapterClass adapter;
+    DatabaseReference pointRef;
+   static String previousPoints;
+   Button submitBtn;
+    String local;
+    private static final String STATE_LIST = "State Adapter Data";
+
     int pagenextnumber = 0;
     String get10pts,get30pts,get50pts,get100pts;
-    Button nextBtn ;
-    Chronometer totalTime ;
+
+    TextView timer ;
+
     int q10, q30,q50,q100;
-    TextView timer;
+    private Button nextBtn;
+    SharedPreferences pref;
     TextView quizPoints;
-    DatabaseReference pointRef;
-    private Button submitBtn;
-    String local;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_logical);
+        setContentView(R.layout.activity_analytical);
+        databaseReference = FirebaseDatabase.getInstance().getReference("Questions").child("Categories").child("Analytical");
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Questions").child("Categories").child("Logical");
 
+        submitBtn = (Button)findViewById(R.id.subBtn);
+        timer = (TextView)findViewById(R.id.timer);
+        quizPoints = (TextView)findViewById(R.id.quizPoints);
         viewPager = (ViewPager) findViewById(R.id.viewpaggerid);
         nextBtn = (Button)findViewById(R.id.nextBtn);
         firebaseLoader = this;
-        timer = (TextView)findViewById(R.id.timer);
-        submitBtn = (Button)findViewById(R.id.subBtn);
-
-        quizPoints = (TextView)findViewById(R.id.quizPoints);
 
         pointRef = FirebaseDatabase.getInstance().getReference("QuizPoints").child(FirebaseAuth.getInstance().getUid()).push();
+
 
         try {
             get10pts = getIntent().getStringExtra("val" );
@@ -84,7 +95,7 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
                             timer.setText("" + millisUntilFinished / 1000);
 
                             SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
-                            local = preferences.getString("counter", "zero");
+                             local = preferences.getString("counter", "zero");
                             quizPoints.setText(local);
                         }
 
@@ -104,7 +115,7 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
                             pointsMap.put("achived_marks" , quizPoints.getText().toString());
                             pointsMap.put("submited_date", currentDate);
                             pointsMap.put("total_marks", "10");
-                            pointsMap.put("category" ,"Logical");
+                            pointsMap.put("category" ,"analytical");
                             pointRef.setValue(pointsMap);
                         }
                     });
@@ -136,7 +147,7 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
                             pointsMap.put("achived_marks" , quizPoints.getText().toString());
                             pointsMap.put("submited_date", currentDate);
                             pointsMap.put("total_marks", "30");
-                            pointsMap.put("category" ,"Logical");
+                            pointsMap.put("category" ,"analytical");
                             pointRef.setValue(pointsMap);
                         }
                     });
@@ -167,7 +178,7 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
                             pointsMap.put("achived_marks" , quizPoints.getText().toString());
                             pointsMap.put("submited_date", currentDate);
                             pointsMap.put("total_marks", "50");
-                            pointsMap.put("category" ,"Logical");
+                            pointsMap.put("category" ,"analytical");
                             pointRef.setValue(pointsMap);
                         }
                     });
@@ -199,7 +210,7 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
                             pointsMap.put("achived_marks" , quizPoints.getText().toString());
                             pointsMap.put("submited_date", currentDate);
                             pointsMap.put("total_marks", "100");
-                            pointsMap.put("category" ,"Logical");
+                            pointsMap.put("category" ,"analytical");
                             pointRef.setValue(pointsMap);
                         }
                     });
@@ -338,7 +349,7 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
                             firebaseLoader.onFirebaseLoadFailure(databaseError.getMessage());
                         }
                     });
-                        break;
+                    break;
                 }
 
                 default: {

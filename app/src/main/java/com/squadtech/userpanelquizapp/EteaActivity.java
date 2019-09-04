@@ -10,8 +10,6 @@ import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Chronometer;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squadtech.userpanelquizapp.Adapter.PagerAdapterClass;
 import com.squadtech.userpanelquizapp.Interface.FirebaseLoader;
 import com.squadtech.userpanelquizapp.Models.Questions;
+import com.squadtech.userpanelquizapp.R;
 import com.squadtech.userpanelquizapp.Transformer.DepthPageTransformer;
 
 import java.text.SimpleDateFormat;
@@ -33,8 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public class LogicalActivity extends AppCompatActivity implements FirebaseLoader {
-
+public class EteaActivity extends AppCompatActivity implements FirebaseLoader {
     DatabaseReference databaseReference;
 
     FirebaseLoader firebaseLoader;
@@ -43,24 +41,27 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
     PagerAdapterClass adapter;
     int pagenextnumber = 0;
     String get10pts,get30pts,get50pts,get100pts;
-    Button nextBtn ;
-    Chronometer totalTime ;
+
+    DatabaseReference pointRef;
+
     int q10, q30,q50,q100;
     TextView timer;
+    private Button nextBtn;
     TextView quizPoints;
-    DatabaseReference pointRef;
     private Button submitBtn;
     String local;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_logical);
+        setContentView(R.layout.activity_etea);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Questions").child("Categories").child("Logical");
+        nextBtn = (Button)findViewById(R.id.nextBtn);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Questions").child("Categories").child("ETEA");
 
         viewPager = (ViewPager) findViewById(R.id.viewpaggerid);
-        nextBtn = (Button)findViewById(R.id.nextBtn);
+
         firebaseLoader = this;
         timer = (TextView)findViewById(R.id.timer);
         submitBtn = (Button)findViewById(R.id.subBtn);
@@ -72,7 +73,6 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
         try {
             get10pts = getIntent().getStringExtra("val" );
             q10 = Integer.parseInt(get10pts);
-
 
 
             switch (q10){
@@ -104,7 +104,7 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
                             pointsMap.put("achived_marks" , quizPoints.getText().toString());
                             pointsMap.put("submited_date", currentDate);
                             pointsMap.put("total_marks", "10");
-                            pointsMap.put("category" ,"Logical");
+                            pointsMap.put("category" ,"Etea");
                             pointRef.setValue(pointsMap);
                         }
                     });
@@ -136,7 +136,7 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
                             pointsMap.put("achived_marks" , quizPoints.getText().toString());
                             pointsMap.put("submited_date", currentDate);
                             pointsMap.put("total_marks", "30");
-                            pointsMap.put("category" ,"Logical");
+                            pointsMap.put("category" ,"Etea");
                             pointRef.setValue(pointsMap);
                         }
                     });
@@ -167,7 +167,7 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
                             pointsMap.put("achived_marks" , quizPoints.getText().toString());
                             pointsMap.put("submited_date", currentDate);
                             pointsMap.put("total_marks", "50");
-                            pointsMap.put("category" ,"Logical");
+                            pointsMap.put("category" ,"Etea");
                             pointRef.setValue(pointsMap);
                         }
                     });
@@ -199,7 +199,7 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
                             pointsMap.put("achived_marks" , quizPoints.getText().toString());
                             pointsMap.put("submited_date", currentDate);
                             pointsMap.put("total_marks", "100");
-                            pointsMap.put("category" ,"Logical");
+                            pointsMap.put("category" ,"Etea");
                             pointRef.setValue(pointsMap);
                         }
                     });
@@ -242,12 +242,12 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
             }
 
         });
+
     }
 
     private void loadData() {
 
         try {
-
             switch (q10){
                 case 10 : {
                     databaseReference.limitToFirst(10).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -338,7 +338,7 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
                             firebaseLoader.onFirebaseLoadFailure(databaseError.getMessage());
                         }
                     });
-                        break;
+                    break;
                 }
 
                 default: {
@@ -352,6 +352,7 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
             Toast.makeText(this, "Error"+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
+
     }
 
     @Override
@@ -359,15 +360,16 @@ public class LogicalActivity extends AppCompatActivity implements FirebaseLoader
         adapter = new PagerAdapterClass(this, (ArrayList<Questions>) questionsArrayList);
         viewPager.setAdapter(adapter);
     }
-
     public void next(View view) {
 
         viewPager.setCurrentItem(pagenextnumber + 1);
 
     }
+
     @Override
     public void onFirebaseLoadFailure(String message) {
 
         Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
     }
+
 }
