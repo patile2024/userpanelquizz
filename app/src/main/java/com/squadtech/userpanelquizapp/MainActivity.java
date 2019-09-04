@@ -3,6 +3,9 @@ package com.squadtech.userpanelquizapp;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -16,6 +19,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,6 +50,7 @@ public class MainActivity extends AppCompatActivity
     FirebaseAuth mAuth;
     TextView headEmail;
     DatabaseReference mRef;
+    GoogleSignInClient mGoogleSignInClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,93 +60,99 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-
-        logiBtn = (Button)findViewById(R.id.logicalBtn);
-        eteaBtn = (Button)findViewById(R.id.EteaBtn);
-        genBtn = (Button)findViewById(R.id.GeneralBtn);
-        anaBtn = (Button)findViewById(R.id.analyticalBtn);
+        mAuth = FirebaseAuth.getInstance();
+        logiBtn = (Button) findViewById(R.id.logicalBtn);
+        eteaBtn = (Button) findViewById(R.id.EteaBtn);
+        genBtn = (Button) findViewById(R.id.GeneralBtn);
+        anaBtn = (Button) findViewById(R.id.analyticalBtn);
+        // Check if user is signed in (non-null) and update UI accordingly.
 
         //Firebase
 
         mAuth = FirebaseAuth.getInstance();
 
-        mRef = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getUid());
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser== null){
+            startActivity(new Intent(MainActivity.this , LoginActivity.class));
+            finish();
+        }
+            mRef = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getUid());
 
 
+            //Headers
+
+            headProfile = headerView.findViewById(R.id.headProfileImg);
+            headName = headerView.findViewById(R.id.HeaderUserName);
+            headEmail = headerView.findViewById(R.id.headerEmail);
 
 
-        //Headers
+            //Value Listener
 
-          headProfile = headerView.findViewById(R.id.headProfileImg);
-        headName = headerView.findViewById(R.id.HeaderUserName);
-        headEmail =headerView.findViewById(R.id.headerEmail);
-
-
-        //Value Listener
-
-        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String image_url = dataSnapshot.child("user_dp").getValue().toString();
-                String nameS = dataSnapshot.child("user_name").getValue().toString();
-                String emailS = dataSnapshot.child("user_email").getValue().toString();
-                System.out.println("my email "+  dataSnapshot.child("user_email").getValue().toString());
-               headEmail.setText(emailS);
-                headName.setText(nameS);
-                if (image_url != null && !image_url.equals("") && !image_url.equals("default")) {
-                    Picasso.get().load(image_url).placeholder(R.drawable.ic_profile).into(headProfile);
+            mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String image_url = dataSnapshot.child("user_dp").getValue().toString();
+                    String nameS = dataSnapshot.child("user_name").getValue().toString();
+                    String emailS = dataSnapshot.child("user_email").getValue().toString();
+                    System.out.println("my email " + dataSnapshot.child("user_email").getValue().toString());
+                    headEmail.setText(emailS);
+                    headName.setText(nameS);
+                    if (image_url != null && !image_url.equals("") && !image_url.equals("default")) {
+                        Picasso.get().load(image_url).placeholder(R.drawable.ic_profile).into(headProfile);
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
 
 
-        logiBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this , SelectQuestions.class);
-                intent.putExtra("logical" , "Logical");
-                startActivity(intent);
-            }
-        });
+            logiBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, SelectQuestions.class);
+                    intent.putExtra("logical", "Logical");
+                    startActivity(intent);
+                }
+            });
 
-        eteaBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this , SelectQuestions.class);
-                intent.putExtra("etea" , "ETEA");
-                startActivity(intent);
-            }
-        });
+            eteaBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, SelectQuestions.class);
+                    intent.putExtra("etea", "ETEA");
+                    startActivity(intent);
+                }
+            });
 
-        genBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this , SelectQuestions.class);
-                intent.putExtra("general" , "General");
-                startActivity(intent);
-            }
-        });
+            genBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, SelectQuestions.class);
+                    intent.putExtra("general", "General");
+                    startActivity(intent);
+                }
+            });
 
-        anaBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this , SelectQuestions.class);
-                intent.putExtra("analytical" , "Analytical");
-                startActivity(intent);
-            }
-        });
+            anaBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(MainActivity.this, SelectQuestions.class);
+                    intent.putExtra("analytical", "Analytical");
+                    startActivity(intent);
+                }
+            });
 //        DrawerLayout drawer = findViewById(R.id.drawer_layout);
 //        NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.addDrawerListener(toggle);
+            toggle.syncState();
+            navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -152,6 +163,16 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+if (currentUser== null){
+startActivity(new Intent(MainActivity.this , LoginActivity.class));
+finish();
+}
     }
 
     @Override
@@ -200,7 +221,9 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_logout)
         {
-
+        startActivity(new Intent(MainActivity.this , LoginActivity.class));
+        finish();
+        FirebaseAuth.getInstance().signOut();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
