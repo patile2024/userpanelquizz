@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@android:color/white"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:elevation="4dp"
+            android:background="@color/colorPrimary"
+            android:text="Points"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/mypointstxt"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Result submited"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+
+        <Button
+            android:id="@+id/confirmBtn_ID"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center"
+            android:background="@drawable/btnstyle"
+            android:text="OK"
+            android:textSize="18dp"
+            android:textColor="@android:color/white"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            ></View>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

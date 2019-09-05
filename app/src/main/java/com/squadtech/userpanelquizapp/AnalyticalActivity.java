@@ -1,6 +1,7 @@
 package com.squadtech.userpanelquizapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +39,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import cn.iwgang.countdownview.CountdownView;
+
 public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoader {
 
 
@@ -61,6 +65,7 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
     private Button nextBtn;
     SharedPreferences pref;
     TextView quizPoints;
+    private CountdownView mCvCountdownView;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -69,15 +74,17 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
         setContentView(R.layout.activity_analytical);
         databaseReference = FirebaseDatabase.getInstance().getReference("Questions").child("Categories").child("Analytical");
 
+        mCvCountdownView = (CountdownView)findViewById(R.id.timer);
 
         submitBtn = (Button)findViewById(R.id.subBtn);
-        timer = (TextView)findViewById(R.id.timer);
-        quizPoints = (TextView)findViewById(R.id.quizPoints);
+//        timer = (TextView)findViewById(R.id.timer);
         viewPager = (ViewPager) findViewById(R.id.viewpaggerid);
         nextBtn = (Button)findViewById(R.id.nextBtn);
         firebaseLoader = this;
 
         pointRef = FirebaseDatabase.getInstance().getReference("QuizPoints").child(FirebaseAuth.getInstance().getUid()).push();
+
+
 
 
         try {
@@ -89,129 +96,305 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
             switch (q10){
 
                 case 10 : {
-                    new CountDownTimer(420000, 1000) {
 
-                        public void onTick(long millisUntilFinished) {
-                            timer.setText("" + millisUntilFinished / 1000);
 
-                            SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
-                             local = preferences.getString("counter", "zero");
-                            quizPoints.setText(local);
-                        }
+                    local = "";
+                    mCvCountdownView.start(420000);
 
-                        public void onFinish() {
-                            timer.setText("Times Up!");
+
+                    mCvCountdownView.setOnCountdownEndListener(new CountdownView.OnCountdownEndListener() {
+                        @Override
+                        public void onEnd(CountdownView cv) {
                             nextBtn.setEnabled(false);
+                            timer.setText("Times Up!");
 
                         }
-                    }.start();
+                    });
 
                     submitBtn.setOnClickListener(new View.OnClickListener() {
+
                         @Override
                         public void onClick(View view) {
-                            HashMap<String , Object> pointsMap = new HashMap<>();
-                            System.out.println("val of local var "+ quizPoints.getText().toString() );
-                            String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-                            pointsMap.put("achived_marks" , quizPoints.getText().toString());
-                            pointsMap.put("submited_date", currentDate);
-                            pointsMap.put("total_marks", "10");
-                            pointsMap.put("category" ,"analytical");
-                            pointRef.setValue(pointsMap);
+
+                            SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
+                            local = preferences.getString("counter", "zero");
+
+
+                            final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(AnalyticalActivity.this);
+                            final View mView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.customedialogbox, null);
+
+
+                            Button confirmBtn = (Button)mView.findViewById(R.id.confirmBtn_ID);
+                            TextView myMarks = (TextView)mView.findViewById(R.id.mypointstxt);
+
+
+
+                            myMarks.setText("You have got "+local+" Marks");
+                            // AlertDialog optionDialog = new AlertDialog.Builder(CreateOfferActivity.this).create();
+                            builder.setView(mView);
+                            final AlertDialog dialog = builder.create();
+
+                            confirmBtn.setOnClickListener(new View.OnClickListener() {
+
+
+                                @Override
+                                public void onClick(View view) {
+
+
+                                    SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
+                                    local = preferences.getString("counter", "zero");
+
+                                    HashMap<String , Object> pointsMap = new HashMap<>();
+                                    System.out.println("val of local var "+ quizPoints.getText().toString() );
+                                    String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                                    pointsMap.put("achived_marks" , local);
+                                    pointsMap.put("submited_date", currentDate);
+                                    pointsMap.put("total_marks", "10");
+                                    pointsMap.put("category" ,"Logical");
+                                    pointRef.setValue(pointsMap);
+                                    dialog.dismiss();
+
+
+
+                                }
+                            });
+
+                            dialog.show();
+                            dialog.setCanceledOnTouchOutside(false);
+
+
+
                         }
+
+
+
+
+
                     });
                     break;
                 }
                 case 30 :{
-                    new CountDownTimer(900000, 1000) {
 
-                        public void onTick(long millisUntilFinished) {
-                            timer.setText("" + millisUntilFinished / 1000);
-                            SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
 
-                            String local = preferences.getString("counter", "zero");
-                            quizPoints.setText(local);
-                        }
+                    local = "";
 
-                        public void onFinish() {
-                            timer.setText("Times Up!");
+                    mCvCountdownView.start(900000);
+
+
+//
+
+                    mCvCountdownView.setOnCountdownEndListener(new CountdownView.OnCountdownEndListener() {
+                        @Override
+                        public void onEnd(CountdownView cv) {
                             nextBtn.setEnabled(false);
+                            timer.setText("Times Up!");
 
                         }
-                    }.start();
+                    });
+
                     submitBtn.setOnClickListener(new View.OnClickListener() {
+
                         @Override
                         public void onClick(View view) {
-                            HashMap<String , Object> pointsMap = new HashMap<>();
-                            System.out.println("val of local var "+ quizPoints.getText().toString() );
-                            String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-                            pointsMap.put("achived_marks" , quizPoints.getText().toString());
-                            pointsMap.put("submited_date", currentDate);
-                            pointsMap.put("total_marks", "30");
-                            pointsMap.put("category" ,"analytical");
-                            pointRef.setValue(pointsMap);
+
+                            SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
+                            local = preferences.getString("counter", "zero");
+
+
+                            final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(AnalyticalActivity.this);
+                            final View mView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.customedialogbox, null);
+
+
+                            Button confirmBtn = (Button)mView.findViewById(R.id.confirmBtn_ID);
+                            TextView myMarks = (TextView)mView.findViewById(R.id.mypointstxt);
+
+
+
+                            myMarks.setText("You have got "+local+" Marks");
+                            // AlertDialog optionDialog = new AlertDialog.Builder(CreateOfferActivity.this).create();
+                            builder.setView(mView);
+                            final AlertDialog dialog = builder.create();
+
+                            confirmBtn.setOnClickListener(new View.OnClickListener() {
+
+
+                                @Override
+                                public void onClick(View view) {
+
+
+                                    SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
+                                    local = preferences.getString("counter", "zero");
+
+                                    HashMap<String , Object> pointsMap = new HashMap<>();
+                                    System.out.println("val of local var "+ quizPoints.getText().toString() );
+                                    String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                                    pointsMap.put("achived_marks" , local);
+                                    pointsMap.put("submited_date", currentDate);
+                                    pointsMap.put("total_marks", "10");
+                                    pointsMap.put("category" ,"Logical");
+                                    pointRef.setValue(pointsMap);
+                                    dialog.dismiss();
+
+                                }
+                            });
+
+                            dialog.show();
+                            dialog.setCanceledOnTouchOutside(false);
+
+
+
                         }
+
+
+
+
+
                     });
                     break;
                 }
                 case 50 : {
-                    new CountDownTimer(1500000, 1000) {
 
-                        public void onTick(long millisUntilFinished) {
-                            timer.setText("" + millisUntilFinished / 1000);
-                            SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
+                    mCvCountdownView.start(1500000);
 
-                            String local = preferences.getString("counter", "zero");
-                            quizPoints.setText(local);
-                        }
 
-                        public void onFinish() {
+
+                    mCvCountdownView.setOnCountdownEndListener(new CountdownView.OnCountdownEndListener() {
+                        @Override
+                        public void onEnd(CountdownView cv) {
+                            nextBtn.setEnabled(false);
                             timer.setText("Times Up!");
-                            nextBtn.setEnabled(false);                        }
-                    }.start();
+
+                        }
+                    });
+
 
                     submitBtn.setOnClickListener(new View.OnClickListener() {
+
                         @Override
                         public void onClick(View view) {
-                            HashMap<String , Object> pointsMap = new HashMap<>();
-                            System.out.println("val of local var "+ quizPoints.getText().toString() );
-                            String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-                            pointsMap.put("achived_marks" , quizPoints.getText().toString());
-                            pointsMap.put("submited_date", currentDate);
-                            pointsMap.put("total_marks", "50");
-                            pointsMap.put("category" ,"analytical");
-                            pointRef.setValue(pointsMap);
+
+                            SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
+                            local = preferences.getString("counter", "zero");
+
+
+                            final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(AnalyticalActivity.this);
+                            final View mView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.customedialogbox, null);
+
+
+                            Button confirmBtn = (Button)mView.findViewById(R.id.confirmBtn_ID);
+                            TextView myMarks = (TextView)mView.findViewById(R.id.mypointstxt);
+
+
+
+                            myMarks.setText("You have got "+local+" Marks");
+                            // AlertDialog optionDialog = new AlertDialog.Builder(CreateOfferActivity.this).create();
+                            builder.setView(mView);
+                            final AlertDialog dialog = builder.create();
+
+                            confirmBtn.setOnClickListener(new View.OnClickListener() {
+
+
+                                @Override
+                                public void onClick(View view) {
+
+
+                                    SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
+                                    local = preferences.getString("counter", "zero");
+
+                                    HashMap<String , Object> pointsMap = new HashMap<>();
+                                    System.out.println("val of local var "+ quizPoints.getText().toString() );
+                                    String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                                    pointsMap.put("achived_marks" , local);
+                                    pointsMap.put("submited_date", currentDate);
+                                    pointsMap.put("total_marks", "10");
+                                    pointsMap.put("category" ,"Logical");
+                                    pointRef.setValue(pointsMap);
+                                    dialog.dismiss();
+
+                                }
+                            });
+
+                            dialog.show();
+                            dialog.setCanceledOnTouchOutside(false);
+
+
+
                         }
+
+
+
+
+
                     });
                     break;
                 }
                 case 100: {
-                    new CountDownTimer(5400000, 1000) {
 
-                        public void onTick(long millisUntilFinished) {
-                            timer.setText("seconds remaining: " + millisUntilFinished / 1000);
-                            SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
+                    local = "";
 
-                            String local = preferences.getString("counter", "zero");
-                            quizPoints.setText(local);
-                        }
+                    mCvCountdownView.start(5400000);
 
-                        public void onFinish() {
-                            timer.setText("done!");
+
+//                        }
+//
+
+                    mCvCountdownView.setOnCountdownEndListener(new CountdownView.OnCountdownEndListener() {
+                        @Override
+                        public void onEnd(CountdownView cv) {
                             nextBtn.setEnabled(false);
-                        }
-                    }.start();
+                            timer.setText("Times Up!");
 
+                        }
+                    });
                     submitBtn.setOnClickListener(new View.OnClickListener() {
+
                         @Override
                         public void onClick(View view) {
-                            HashMap<String , Object> pointsMap = new HashMap<>();
-                            System.out.println("val of local var "+ quizPoints.getText().toString() );
-                            String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-                            pointsMap.put("achived_marks" , quizPoints.getText().toString());
-                            pointsMap.put("submited_date", currentDate);
-                            pointsMap.put("total_marks", "100");
-                            pointsMap.put("category" ,"analytical");
-                            pointRef.setValue(pointsMap);
+
+                            SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
+                            local = preferences.getString("counter", "zero");
+
+
+                            final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(AnalyticalActivity.this);
+                            final View mView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.customedialogbox, null);
+
+
+                            Button confirmBtn = (Button)mView.findViewById(R.id.confirmBtn_ID);
+                            TextView myMarks = (TextView)mView.findViewById(R.id.mypointstxt);
+
+
+
+                            myMarks.setText("You have got "+local+" Marks");
+                            // AlertDialog optionDialog = new AlertDialog.Builder(CreateOfferActivity.this).create();
+                            builder.setView(mView);
+                            final AlertDialog dialog = builder.create();
+
+                            confirmBtn.setOnClickListener(new View.OnClickListener() {
+
+
+                                @Override
+                                public void onClick(View view) {
+
+
+                                    SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
+                                    local = preferences.getString("counter", "zero");
+
+                                    HashMap<String , Object> pointsMap = new HashMap<>();
+                                    System.out.println("val of local var "+ quizPoints.getText().toString() );
+                                    String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                                    pointsMap.put("achived_marks" , local);
+                                    pointsMap.put("submited_date", currentDate);
+                                    pointsMap.put("total_marks", "10");
+                                    pointsMap.put("category" ,"Logical");
+                                    pointRef.setValue(pointsMap);
+                                    dialog.dismiss();
+
+                                }
+                            });
+
+                            dialog.show();
+                            dialog.setCanceledOnTouchOutside(false);
+
                         }
                     });
                     break;
@@ -254,7 +437,27 @@ public class AnalyticalActivity extends AppCompatActivity implements FirebaseLoa
 
         });
     }
+    private void updateTime() {
+        runOnUiThread(new Runnable() {
 
+            @Override
+            public void run() {
+
+                SharedPreferences preferences = getSharedPreferences("counter", MODE_PRIVATE);
+
+
+
+                local = preferences.getString("counter", "zero");
+                System.out.println("local "+local);
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                quizPoints.setText(local);
+            }
+        });
+    }
     private void loadData() {
 
         try {

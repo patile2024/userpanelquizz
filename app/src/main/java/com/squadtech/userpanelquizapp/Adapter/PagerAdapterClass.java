@@ -39,11 +39,11 @@ public class PagerAdapterClass extends PagerAdapter {
     public ArrayList<String> answersList = new ArrayList<String>();
     private boolean enabled;
     int localtime;
-String selected, correct ;
-int selectedInt , correctInt;
-     int counter = 0;
-    SharedPreferences myPoints  ;
-    SharedPreferences.Editor editor ;
+    String selected, correct;
+    int selectedInt, correctInt;
+    int counter = 0;
+    SharedPreferences myPoints;
+    SharedPreferences.Editor editor;
     ArrayList<Integer> timeArray = new ArrayList<Integer>();
 
 
@@ -71,7 +71,7 @@ int selectedInt , correctInt;
         final TextView option2 = (TextView) view.findViewById(R.id.option2);
         final TextView option3 = (TextView) view.findViewById(R.id.option3);
         final TextView option4 = (TextView) view.findViewById(R.id.option4);
-        final  TextView answer = (TextView)view.findViewById(R.id.answer);
+        final TextView answer = (TextView) view.findViewById(R.id.answer);
 
 
         System.err.println("my data" + questionsArrayList.get(position).getQuestion());
@@ -84,160 +84,164 @@ int selectedInt , correctInt;
 //        timer.setText(questionsArrayList.get(position).getTime());
 
         option1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
 
 
-
-                        if (answersList.size() > position && !answersList.get(position).equals("")) {
-                            answersList.remove(position );
-                        }
-                        selected = option1.getText().toString();
-                        correct = answer.getText().toString();
-
-
-                    if (selected.equals(correct))
-                    counter++ ;
-                        System.out.println("my points " + (++counter));
+                if (answersList.size() > position && !answersList.get(position).equals("")) {
+                    answersList.remove(position);
+                }
+                selected = option1.getText().toString();
+                correct = answer.getText().toString();
 
 
+                if (selected.equals(correct))
+                    counter++;
+                System.out.println("my points " + (++counter));
 
 
-                        SharedPreferences.Editor editor1 = context.getSharedPreferences("counter", MODE_PRIVATE).edit();
-                        editor1.putString("counter", String.valueOf(counter));
-
-                        editor1.apply();
+                SharedPreferences.Editor editor1 = context.getSharedPreferences("counter", MODE_PRIVATE).edit();
 
 
-                        answer.setVisibility(View.VISIBLE);
-                        answer.setText(questionsArrayList.get(position).getAnswer());
+                editor1.putString("counter", String.valueOf(counter));
+
+                editor1.apply();
+
+
+                SharedPreferences preferences = context.getSharedPreferences("counter", MODE_PRIVATE);
+
+                System.out.println("poing "+preferences.getString("counter", "zero"));
+
+
+                answer.setVisibility(View.VISIBLE);
+                answer.setText(questionsArrayList.get(position).getAnswer());
 //                        answersList.add(position, option1.getText().toString());
-                        option1.setBackgroundColor(Color.GREEN);
-                        option2.setBackgroundResource(R.drawable.textinputs);
-                        option3.setBackgroundResource(R.drawable.textinputs);
-                        option4.setBackgroundResource(R.drawable.textinputs);
+                option1.setBackgroundColor(Color.GREEN);
+                option2.setBackgroundResource(R.drawable.textinputs);
+                option3.setBackgroundResource(R.drawable.textinputs);
+                option4.setBackgroundResource(R.drawable.textinputs);
 
-                        //click disable
-                        option1.setClickable(false);
-                        option2.setClickable(false);
-                        option3.setClickable(false);
-                        option4.setClickable(false);
-                        System.out.println("Array list data " + answersList);
-                        Toast.makeText(context, "Cliked " + position, Toast.LENGTH_SHORT).show();
-
-
-                    }
+                //click disable
+                option1.setClickable(false);
+                option2.setClickable(false);
+                option3.setClickable(false);
+                option4.setClickable(false);
+                System.out.println("Array list data " + answersList);
+                Toast.makeText(context, "Cliked " + position, Toast.LENGTH_SHORT).show();
 
 
-                });
-                option2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+            }
 
 
-                        if (answersList.size() > position && !answersList.get(position).equals("")) {
-                            answersList.remove(position );
-                        }
-                        selected = option1.getText().toString();
-                        correct = answer.getText().toString();
+        });
+        option2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
 
-                        if (selected.equals(correct))
-                            counter++ ;
+                if (answersList.size() > position && !answersList.get(position).equals("")) {
+                    answersList.remove(position);
+                }
+                selected = option1.getText().toString();
+                correct = answer.getText().toString();
 
 
-                        SharedPreferences.Editor editor1 = context.getSharedPreferences("counter", MODE_PRIVATE).edit();
-                        editor1.putString("counter", String.valueOf(counter));
-
-                        editor1.apply();
+                if (selected.equals(correct))
+                    counter++;
 
 
-                      //  answersList.add(position, option2.getText().toString());
-                        answer.setText(questionsArrayList.get(position).getAnswer());
-                        answer.setVisibility(View.VISIBLE);
-                        option2.setBackgroundColor(Color.GREEN);
-                        option1.setBackgroundResource(R.drawable.textinputs);
-                        option3.setBackgroundResource(R.drawable.textinputs);
-                        option4.setBackgroundResource(R.drawable.textinputs);
-                        System.out.println("Array list data " + answersList);
-                        option1.setClickable(false);
-                        option2.setClickable(false);
-                        option3.setClickable(false);
-                        option4.setClickable(false);
-                        Toast.makeText(context, "Cliked " + position, Toast.LENGTH_SHORT).show();
-                    }
-                });
-                option3.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                SharedPreferences.Editor editor1 = context.getSharedPreferences("counter", MODE_PRIVATE).edit();
+                editor1.putString("counter", String.valueOf(counter));
 
-                        if (answersList.size() > position && !answersList.get(position).equals("")) {
-                            answersList.remove(position );
-                        }
-
-                        selected = option1.getText().toString();
-                        correct = answer.getText().toString();
+                editor1.apply();
 
 
-                        if (selected.equals(correct))
-                            counter++ ;
+                //  answersList.add(position, option2.getText().toString());
+                answer.setText(questionsArrayList.get(position).getAnswer());
+                answer.setVisibility(View.VISIBLE);
+                option2.setBackgroundColor(Color.GREEN);
+                option1.setBackgroundResource(R.drawable.textinputs);
+                option3.setBackgroundResource(R.drawable.textinputs);
+                option4.setBackgroundResource(R.drawable.textinputs);
+                System.out.println("Array list data " + answersList);
+                option1.setClickable(false);
+                option2.setClickable(false);
+                option3.setClickable(false);
+                option4.setClickable(false);
+                Toast.makeText(context, "Cliked " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+        option3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                        SharedPreferences.Editor editor1 = context.getSharedPreferences("counter", MODE_PRIVATE).edit();
-                        editor1.putString("counter", String.valueOf(counter));
+                if (answersList.size() > position && !answersList.get(position).equals("")) {
+                    answersList.remove(position);
+                }
 
-                        editor1.apply();
-
-                       // answersList.add(position, option3.getText().toString());
-                        option3.setBackgroundColor(Color.GREEN);
-                        option2.setBackgroundResource(R.drawable.textinputs);
-                        option1.setBackgroundResource(R.drawable.textinputs);
-                        option4.setBackgroundResource(R.drawable.textinputs);
-                        answer.setText(questionsArrayList.get(position).getAnswer());
-                        answer.setVisibility(View.VISIBLE);
-                        option1.setClickable(false);
-                        option2.setClickable(false);
-                        option3.setClickable(false);
-                        option4.setClickable(false);
-                        System.out.println("Array list data " + answersList);
-
-                        Toast.makeText(context, "Cliked " + position, Toast.LENGTH_SHORT).show();
-                    }
-                });
-                option4.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        if (answersList.size() > position && !answersList.get(position).equals("")) {
-                            answersList.remove(position );
-                        }
-
-                        selected = option1.getText().toString();
-                        correct = answer.getText().toString();
+                selected = option1.getText().toString();
+                correct = answer.getText().toString();
 
 
-                        if (selected.equals(correct))
-                            counter++ ;
+                if (selected.equals(correct))
+                    counter++;
 
-                        SharedPreferences.Editor editor1 = context.getSharedPreferences("counter", MODE_PRIVATE).edit();
-                        editor1.putString("counter", String.valueOf(counter));
+                SharedPreferences.Editor editor1 = context.getSharedPreferences("counter", MODE_PRIVATE).edit();
+                editor1.putString("counter", String.valueOf(counter));
 
-                        editor1.apply();
+                editor1.apply();
 
-                        //answersList.add(position, option4.getText().toString());
-                        option4.setBackgroundColor(Color.GREEN);
-                        option2.setBackgroundResource(R.drawable.textinputs);
-                        option3.setBackgroundResource(R.drawable.textinputs);
-                        option1.setBackgroundResource(R.drawable.textinputs);
-                        answer.setText(questionsArrayList.get(position).getAnswer());
-                        answer.setVisibility(View.VISIBLE);
-                        option1.setClickable(false);
-                        option2.setClickable(false);
-                        option3.setClickable(false);
-                        option4.setClickable(false);
-                        System.out.println("Array list data " + answersList);
-                        Toast.makeText(context, "Cliked " + position, Toast.LENGTH_SHORT).show();
-                    }
-                });
+                // answersList.add(position, option3.getText().toString());
+                option3.setBackgroundColor(Color.GREEN);
+                option2.setBackgroundResource(R.drawable.textinputs);
+                option1.setBackgroundResource(R.drawable.textinputs);
+                option4.setBackgroundResource(R.drawable.textinputs);
+                answer.setText(questionsArrayList.get(position).getAnswer());
+                answer.setVisibility(View.VISIBLE);
+                option1.setClickable(false);
+                option2.setClickable(false);
+                option3.setClickable(false);
+                option4.setClickable(false);
+                System.out.println("Array list data " + answersList);
+
+                Toast.makeText(context, "Cliked " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+        option4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (answersList.size() > position && !answersList.get(position).equals("")) {
+                    answersList.remove(position);
+                }
+
+                selected = option1.getText().toString();
+                correct = answer.getText().toString();
+
+
+                if (selected.equals(correct))
+                    counter++;
+
+                SharedPreferences.Editor editor1 = context.getSharedPreferences("counter", MODE_PRIVATE).edit();
+                editor1.putString("counter", String.valueOf(counter));
+
+                editor1.apply();
+
+                //answersList.add(position, option4.getText().toString());
+                option4.setBackgroundColor(Color.GREEN);
+                option2.setBackgroundResource(R.drawable.textinputs);
+                option3.setBackgroundResource(R.drawable.textinputs);
+                option1.setBackgroundResource(R.drawable.textinputs);
+                answer.setText(questionsArrayList.get(position).getAnswer());
+                answer.setVisibility(View.VISIBLE);
+                option1.setClickable(false);
+                option2.setClickable(false);
+                option3.setClickable(false);
+                option4.setClickable(false);
+                System.out.println("Array list data " + answersList);
+                Toast.makeText(context, "Cliked " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
         container.addView(view);
 
         return view;
@@ -249,7 +253,6 @@ int selectedInt , correctInt;
         ((ViewPager) container).removeView((View) view);
 
     }
-
 
 
     @Override
@@ -264,9 +267,6 @@ int selectedInt , correctInt;
     public int getCount() {
         return questionsArrayList.size();
     }
-
-
-
 
 
 }
