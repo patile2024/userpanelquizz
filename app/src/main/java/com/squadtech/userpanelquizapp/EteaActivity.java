@@ -49,7 +49,7 @@ public class EteaActivity extends AppCompatActivity implements FirebaseLoader {
 
     DatabaseReference pointRef;
 
-    int q10, q30,q50,q100;
+    int q10, q30, q50, q100;
     TextView timer;
     private Button nextBtn;
     TextView quizPoints;

@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "993625639302",
-    "firebase_url": "https://adminpanelquiz.firebaseio.com",
-    "project_id": "adminpanelquiz",
-    "storage_bucket": "adminpanelquiz.appspot.com"
+    "project_number": "434520173491",
+    "firebase_url": "https://adminquiz-b787e-default-rtdb.firebaseio.com",
+    "project_id": "adminquiz-b787e",
+    "storage_bucket": "adminquiz-b787e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:993625639302:android:0940c347fbe30aa4",
+        "mobilesdk_app_id": "1:434520173491:android:296a164260ec76f05439c6",
         "android_client_info": {
           "package_name": "com.squadtech.adminpanelquiz"
         }
       },
       "oauth_client": [
         {
-          "client_id": "993625639302-00n2mg7as844ucfrvqqefqklqmsj5if2.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.squadtech.adminpanelquiz",
-            "certificate_hash": "29f80e0b48c77f1cfc180f4b0590a7bc656c9863"
-          }
-        },
-        {
-          "client_id": "993625639302-fvmqng9su3dav8t1uaqee3hnn05vlj1o.apps.googleusercontent.com",
+          "client_id": "434520173491-r7rvvr4qvh4rik4tt4dtgaqbu5d70s31.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBPxdxFBN-u-N_vfBV0RzD_unI7TaHBfbc"
+          "current_key": "AIzaSyATz2q0FLh8PARz4Kxjj11plV4FKOrnH4Q"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "993625639302-fvmqng9su3dav8t1uaqee3hnn05vlj1o.apps.googleusercontent.com",
+              "client_id": "434520173491-r7rvvr4qvh4rik4tt4dtgaqbu5d70s31.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -45,35 +37,27 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:993625639302:android:7596626096588499",
+        "mobilesdk_app_id": "1:434520173491:android:30ecd2ad5225db515439c6",
         "android_client_info": {
           "package_name": "com.squadtech.userpanelquizapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "993625639302-4dboe9au4pv902na14iehnp1pvcup5u7.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.squadtech.userpanelquizapp",
-            "certificate_hash": "29f80e0b48c77f1cfc180f4b0590a7bc656c9863"
-          }
-        },
-        {
-          "client_id": "993625639302-fvmqng9su3dav8t1uaqee3hnn05vlj1o.apps.googleusercontent.com",
+          "client_id": "434520173491-r7rvvr4qvh4rik4tt4dtgaqbu5d70s31.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBPxdxFBN-u-N_vfBV0RzD_unI7TaHBfbc"
+          "current_key": "AIzaSyATz2q0FLh8PARz4Kxjj11plV4FKOrnH4Q"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "993625639302-fvmqng9su3dav8t1uaqee3hnn05vlj1o.apps.googleusercontent.com",
+              "client_id": "434520173491-r7rvvr4qvh4rik4tt4dtgaqbu5d70s31.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
